@@ -14,4 +14,6 @@ Update 11 - 24.08.2020:PM - Add 'Exchanges' (mVCmR) first functions and design <
 Update 12 - 
 
 ---
-Fix 1 (UPD 6) - 23.08.2020 - Fix Trades migration -> nullable(open, close prices) <br />
+Fix 1 (UPD 6) - 23.08.2020:AM - Fix Trades migration -> nullable(open, close prices) <br />
+Fix 2         - 24.08.2020:PM - Fix extra quote in undelete-form-action <br />
+Fix 3

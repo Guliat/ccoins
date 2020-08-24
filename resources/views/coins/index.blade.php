@@ -66,7 +66,7 @@
                   </div>
                 </div> 
                 @else
-                  <form action="{{ route('coins.undelete', $coin->id) }}'" method="post">
+                  <form action="{{ route('coins.undelete', $coin->id) }}" method="post">
                     @csrf
                     @method('put')
                     <button class="button is-danger is-light" title="Return to active">
