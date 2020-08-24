@@ -2,7 +2,7 @@
 @section('content')
     <div class="flex-center position-ref full-height">
         <div class="has-text-centered">
-            <div class="subtitle is-size-0 has-text-dark mb-0">
+            <div class="is-size-0 has-text-dark mb-0">
                 CCoins
             </div>
             <div class="subtitle is-size-6 has-text-dark">
