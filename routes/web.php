@@ -32,6 +32,7 @@ Route::get('/coins/edit/{coins}', 'CoinsController@edit')->name('coins.edit');
 Route::post('/coins/store', 'CoinsController@store')->name('coins.store');
 Route::put('/coins/update/{coins}', 'CoinsController@update')->name('coins.update');
 Route::put('/coins/delete/{coins}', 'CoinsController@delete')->name('coins.delete');
+Route::put('/coins/undelete/{coins}', 'CoinsController@unDelete')->name('coins.undelete');
 
 // EXCHANGES
 Route::get('/exchanges', 'ExchangesController@index')->name('exchanges.index');
