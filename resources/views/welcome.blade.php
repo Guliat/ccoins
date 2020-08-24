@@ -15,7 +15,7 @@
                 <a href="#">TRADES PER COIN</a>
                 <a href="#">|</a>
                 <a href="{{ route('coins.index') }}">COINS</a>
-                <a href="#">EXCHANGES</a>
+                <a href="{{ route('exchanges.index') }}">EXCHANGES</a>
             </div>
         </div>
     </div>

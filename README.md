@@ -10,7 +10,8 @@ Update  7 - 23.08.2020:PM - Add Bulma, Bulma tooltip, Bulma Badge (Yarn), FontAw
 Update  8 - 24.08.2020:AM - Add Buefy, VueJS (Yarn) <br />
 Update  9 - 24.08.2020:PM - Add 'Coins' (mVCmR) first functions and design <br />
 Update 10 - 24.08.2020:PM - Add Toasts for Add, Update, Delete, Undelete <br />
-Update 11 - 
+Update 11 - 24.08.2020:PM - Add 'Exchanges' (mVCmR) first functions and design <br />
+Update 12 - 
 
 ---
 Fix 1 (UPD 6) - 23.08.2020 - Fix Trades migration -> nullable(open, close prices) <br />

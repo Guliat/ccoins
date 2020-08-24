@@ -41,3 +41,4 @@ Route::get('/exchanges/edit/{exchanges}', 'ExchangesController@edit')->name('exc
 Route::post('/exchanges/store', 'ExchangesController@store')->name('exchanges.store');
 Route::put('/exchanges/update/{exchanges}', 'ExchangesController@update')->name('exchanges.update');
 Route::put('/exchanges/delete/{exchanges}', 'ExchangesController@delete')->name('exchanges.delete');
+Route::put('/exchanges/undelete/{exchanges}', 'ExchangesController@unDelete')->name('exchanges.undelete');
