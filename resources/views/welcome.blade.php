@@ -2,21 +2,18 @@
 @section('content')
     <div class="flex-center position-ref full-height">
         <div class="has-text-centered">
-            <div class="is-size-0 has-text-dark mb-0">
+            <div class="is-size-0 has-text-dark">
                 CCoins
             </div>
-            <div class="subtitle is-size-6 has-text-dark">
-                by aleXandar encheW
+            <div class="subtitle is-size-7 has-text-dark">
+                <p class="is-size-5">
+                    Cryptocurrencies Portfolio Watchlist
+                </p>
+                <p class="pt-3">
+                    by aleXandar encheW
+                </p>
             </div>
-            <div class="links pt-5">
-                <a href="#">ADD TRADE</a>
-                <a href="#">ALL TRADES</a>
-                <a href="#">TRADES PER EXCHAGE</a>
-                <a href="#">TRADES PER COIN</a>
-                <a href="#">|</a>
-                <a href="{{ route('coins.index') }}">COINS</a>
-                <a href="{{ route('exchanges.index') }}">EXCHANGES</a>
-            </div>
+
         </div>
     </div>
 @endsection

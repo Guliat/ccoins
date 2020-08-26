@@ -19,8 +19,13 @@
           margin: 0;
       }
 
+      .nunito {
+          font-family: Nunito;
+          font-weight: 200;
+      }
+
       .full-height {
-          height: 100vh;
+          height: 85vh;
       }
 
       .flex-center {
