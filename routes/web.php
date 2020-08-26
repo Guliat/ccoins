@@ -18,7 +18,10 @@ Route::get('/', function () {
 });
 
 // TRADES
-Route::get('/trades', 'TradesController@index')->name('trades.index');
+Route::get('/trades/active', 'TradesController@activeTrades')->name('trades.active');
+Route::get('/trades/closed', 'TradesController@closedTrades')->name('trades.closed');
+Route::get('/trades/exchanges', 'TradesController@tradesPerExchanges')->name('trades.exchanges');
+Route::get('/trades/coins', 'TradesController@tradesPerCoins')->name('trades.coins');
 Route::get('/trades/create', 'TradesController@create')->name('trades.create');
 Route::get('/trades/edit/{trades}', 'TradesController@edit')->name('trades.edit');
 Route::post('/trades/store', 'TradesController@store')->name('trades.store');
