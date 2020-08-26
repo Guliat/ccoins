@@ -7,7 +7,6 @@
 .editorconfig
 .gitattributes
 .styleci.yml
-artisan
 server.php
 phpunit.xml
 
