@@ -11,7 +11,8 @@ Update  8 - 24.08.2020:AM - Add Buefy, VueJS (Yarn) <br />
 Update  9 - 24.08.2020:PM - Add 'Coins' (mVCmR) first functions and design <br />
 Update 10 - 24.08.2020:PM - Add Toasts for Add, Update, Delete, Undelete <br />
 Update 11 - 24.08.2020:PM - Add 'Exchanges' (mVCmR) first functions and design <br />
-Update 12 - 
+Update 12 - 26.08.2020:PM - Add CoinGecko API (Composer) <br />
+Update 13 - 
 
 ---
 Fix 1 (UPD 6) - 23.08.2020:AM - Fix Trades migration -> nullable(open, close prices) <br />
