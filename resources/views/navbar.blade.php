@@ -1,15 +1,15 @@
 <nav class="navbar is-fixed-top is-dark nunito" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="{{ url('/') }}">
-      <span class="is-size-4 pl-5">Ccoins</span>
+      <span class="is-size-4 pl-5">Ccoins App</span>
     </a>
-    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false">
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbar-active">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
     </a>
   </div>
-
+<div class="navbar-menu" id="navbar-active">
   <div class="navbar-start">
     <span class="navbar-item is-size-5 mt-1">
       @if(Route::current()->getName() == 'trades.active')
@@ -34,7 +34,7 @@
     </span>
   </div>
 
-  <div class="navbar-end">
+  <div class="navbar-end pr-3">
     <a href="{{ route('trades.create') }}" class="navbar-item">
       Add Trade
     </a>
@@ -44,18 +44,32 @@
     <a href="{{ route('trades.closed') }}" class="navbar-item">
       Closed Trades
     </a>
-    <a class="navbar-item">
+    <a href="{{ route('trades.exchanges') }}" class="navbar-item">
       Trades per Exchange
     </a>
-    <a class="navbar-item">
+    <a href="{{ route('trades.coins') }}" class="navbar-item">
       Trades per Coins
     </a>
     <b class="navbar-item"> | </b>
     <div class="navbar-item">
       <div class="buttons">
-        <a class="button is-white is-outlined" href="{{ route('coins.index') }}">Coins</a>
-        <a class="button is-white is-outlined" href="{{ route('exchanges.index') }}" >Exchanges</a>
+        {{-- @if(Auth::check()) --}}
+          <a class="button is-white is-outlined" href="{{ route('coins.index') }}">Coins</a>
+          <a class="button is-white is-outlined" href="{{ route('exchanges.index') }}" >Exchanges</a>
+          {{-- <form id="logout-form" action="{{ route('logout') }}" method="POST" >
+            @csrf
+            <button type="submit" class="button is-white is-outlined">
+              <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+            </button>
+          </form>
+        @else
+        <a class="button is-white is-outlined" href="{{ route('register') }}" >Register</a>
+          <a class="button is-white is-outlined" href="{{ route('login') }}">
+            <span class="icon"><i class="far fa-user"></i></span>
+          </a>
+        @endif --}}
       </div>
     </div>
   </div>
+</div>
 </nav>
