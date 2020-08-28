@@ -36,6 +36,26 @@ class TradesController extends Controller {
 
     }
 
+    public function tradesPerCoins() {
+
+        $trades = Trades::where('is_active', 1)->get();
+
+        $coins = Coins::where('is_active', 1)->get();
+        $coinss = '';
+        foreach($coins as $coin) {
+            $coinss .= $coin->api_link.",";
+        }
+
+        $client = new CoinGeckoClient();
+        $data = $client->simple()->getPrice($coinss, 'usd');
+
+        return view('trades.per_coins')
+            ->withCoins($coins)
+            ->withTrades($trades)
+            ->withData($data);
+
+    }
+
     public function create() {
 
         $coins = Coins::where('is_active', 1)->get();

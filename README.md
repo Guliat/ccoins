@@ -16,7 +16,9 @@ Ver. 0.11.2 - 24.08.2020:PM - Add 'Exchanges' (mVCmR) first functions and design
 Ver. 0.12.2 - 26.08.2020:PM - Add CoinGecko API (Composer) <br />
 Ver. 0.13.2 - 26.08.2020:PM - Add 'Trades' (MVCMR) first functions and design <br />
 Ver. 1.14.2 - 26.08.2020:PM - Add Navbar, changes in Welcome page <br />
-Ver.  
+Ver. 1.15.2 - 28.08.2020:PM - Add "PerCoins" View (cards), Controller, Model <br />
+Ver. 
 
 ---
 Version 1.14.2 - First fully functional version (must work :D - NOT TESTED with pulling, etc.) <br />
+          EDIT - Tested on Ubuntu with Nginx - It Works. <br />
