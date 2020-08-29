@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Session;
 use App\Coins;
 use Illuminate\Http\Request;
+use Codenixsv\CoinGeckoApi\CoinGeckoClient;
 
 class CoinsController extends Controller {
     
@@ -13,8 +14,16 @@ class CoinsController extends Controller {
     }
     
     public function index() {
-        $coins = Coins::all();
-        return view('coins.index')->withCoins($coins);
+        $all_coins = Coins::all();
+        $coins = null;
+        foreach($all_coins as $coin) {
+            $coins .= $coin->api_link.",";
+        }
+        
+        $client = new CoinGeckoClient();
+        $data = $client->simple()->getPrice($coins, 'usd');
+
+        return view('coins.index')->withCoins($all_coins)->withData($data);
     }
 
     public function create() {

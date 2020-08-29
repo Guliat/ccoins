@@ -21,9 +21,11 @@ Ver. 1.16.2 - 28.08.2020:PM - Changes in Navbar (burger fix (script)) and Welcom
 Ver. 1.17.2 - 29.08.2020:AM - Work on "close trade",changes in active_trade view, migration (close_quantity), close_trade function, etc. <br />
       Fix 3 - Change "steps" from 6 to 8 in number inputs when close trade <br />
 Ver. 1.17.3 - 29.08.2020:PM - Add Laravel errors views and change design a little <br />
-Ver. 1.18.3 - 29.08.2020:PM - Add Authentication, controllers, views, changes in design to work with it. <br />
+Ver. 1.18.3 - 29.08.2020:PM - Add Authentication, controllers, views, changes in design to work with it. (must run composer)<br />
+Ver. 1.19.3 - 30.08.2020:AM - Add current price in coins.index <br />
 Ver. 
 
 ---
 Version 1.14.2 - First fully functional version (must work :D - NOT TESTED with pulling, etc.) <br />
-          EDIT - Tested on Ubuntu with Nginx - It Works. <br />
+EDIT (1.14.2) - Tested on Ubuntu with Nginx - It Works. <br />
+---
