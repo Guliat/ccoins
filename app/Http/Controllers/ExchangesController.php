@@ -6,6 +6,11 @@ use App\Exchanges;
 use Illuminate\Http\Request;
 
 class ExchangesController extends Controller {
+    
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index() {
         $exchanges = Exchanges::all();

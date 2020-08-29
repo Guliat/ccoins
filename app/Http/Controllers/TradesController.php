@@ -11,6 +11,11 @@ use Codenixsv\CoinGeckoApi\CoinGeckoClient;
 
 class TradesController extends Controller {
     
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function activeTrades() {
         
         $get_coins = Coins::select('api_link')->get();

@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class CoinsController extends Controller {
     
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index() {
         $coins = Coins::all();
         return view('coins.index')->withCoins($coins);

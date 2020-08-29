@@ -45,8 +45,8 @@
                   </b-field>
               </section>
               <footer class="modal-card-foot">
-                <button class="button is-success">Save</button>
-                <button class="button is-danger is-outlined" type="button" @click="modal{{ $trade->id }} = false">Cancel</button>
+                <button type="submit" class="button is-success">Save</button>
+                <a class="button is-danger is-outlined" @click="modal{{ $trade->id }} = false">Cancel</a>
               </footer>
             </form>
           </div>

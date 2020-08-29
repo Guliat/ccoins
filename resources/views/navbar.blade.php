@@ -35,6 +35,7 @@
   </div>
 
   <div class="navbar-end pr-3">
+    @if(Auth::check())
     <a href="{{ route('trades.create') }}" class="navbar-item">
       Add Trade
     </a>
@@ -44,7 +45,7 @@
     <a href="{{ route('trades.closed') }}" class="navbar-item">
       Closed Trades
     </a>
-    <a href="{{ route('trades.exchanges') }}" class="navbar-item">
+    <a href="#" class="navbar-item">
       Trades per Exchange
     </a>
     <a href="{{ route('trades.coins') }}" class="navbar-item">
@@ -53,21 +54,27 @@
     <b class="navbar-item"> | </b>
     <div class="navbar-item">
       <div class="buttons">
-        {{-- @if(Auth::check()) --}}
-          <a class="button is-white is-outlined" href="{{ route('coins.index') }}">Coins</a>
-          <a class="button is-white is-outlined" href="{{ route('exchanges.index') }}" >Exchanges</a>
-          {{-- <form id="logout-form" action="{{ route('logout') }}" method="POST" >
-            @csrf
-            <button type="submit" class="button is-white is-outlined">
-              <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
-            </button>
-          </form>
-        @else
-        <a class="button is-white is-outlined" href="{{ route('register') }}" >Register</a>
-          <a class="button is-white is-outlined" href="{{ route('login') }}">
+    <a class="button is-white is-outlined" href="{{ route('coins.index') }}">Coins</a>
+    <a class="button is-white is-outlined" href="{{ route('exchanges.index') }}" >Exchanges</a>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" >
+      @csrf
+      <button type="submit" class="button is-white is-outlined">
+        <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+      </button>
+    </form>
+      </div></div>
+    @else
+    <div class="navbar-item">
+      <div class="buttons">
+        <div id="register_login_modal">
+          @include('login_modal')
+          @include('register_modal')
+          <a class="button is-white is-outlined" @click="register_modal = true" >Sign Up</a>
+          <a class="button is-white is-outlined px-5" @click="login_modal = true" >
             <span class="icon"><i class="far fa-user"></i></span>
           </a>
-        @endif --}}
+        </div>
+        @endif
       </div>
     </div>
   </div>
