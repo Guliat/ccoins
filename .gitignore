@@ -2,11 +2,13 @@
 /public/images
 /storage/*.key
 /vendor
+
 .env
 .env.backup
 .editorconfig
 .gitattributes
 .styleci.yml
+composer.lock
 server.php
 phpunit.xml
 
