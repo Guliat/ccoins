@@ -37,11 +37,11 @@
               <header class="modal-card-head">Close trade (can close only a part)</header>
               <section class="modal-card-body">
                   <b-field label="Close Quantity (if is a part)" label-position="on-border">
-                      <b-input type="number" :value="{{ $trade->quantity }}" placeholder="Close Quantity" name="quantity" required max="{{ $trade->quantity }}" min="0" step="0.000001" ></b-input>
+                      <b-input type="number" :value="{{ $trade->quantity }}" placeholder="Close Quantity" name="quantity" required max="{{ $trade->quantity }}" min="0" step="0.00000001" ></b-input>
                   </b-field>
                   <div class="py-2"></div>
                   <b-field label="Close Price (if different)" label-position="on-border">
-                    <b-input type="number" :value="{{ $data[$trade->coin->api_link]['usd'] }}" name="close_price" placeholder="Close Price" required step="0.000001"></b-input>
+                    <b-input type="number" :value="{{ $data[$trade->coin->api_link]['usd'] }}" name="close_price" placeholder="Close Price" required step="0.00000001"></b-input>
                   </b-field>
               </section>
               <footer class="modal-card-foot">

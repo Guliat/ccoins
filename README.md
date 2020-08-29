@@ -19,8 +19,8 @@ Ver. 1.14.2 - 26.08.2020:PM - Add Navbar, changes in Welcome page <br />
 Ver. 1.15.2 - 28.08.2020:PM - Add "PerCoins" View (cards), Controller, Model <br />
 Ver. 1.16.2 - 28.08.2020:PM - Changes in Navbar (burger fix (script)) and Welcome Page <br />
 Ver. 1.17.2 - 29.08.2020:AM - Work on "close trade",changes in active_trade view, migration (close_quantity), close_trade function, etc. <br />
-Ver. 
-
+Ver. 1.17.3 - 29.08.2020:PM -
+        Fix - Change "steps" from 6 to 8 in number inputs when close trade <br />
 ---
 Version 1.14.2 - First fully functional version (must work :D - NOT TESTED with pulling, etc.) <br />
           EDIT - Tested on Ubuntu with Nginx - It Works. <br />
