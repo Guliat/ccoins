@@ -72,7 +72,7 @@ new Vue({
     coin_name: '',
     exchange_name: '',
     selected: null,
-    coin: [<?php foreach($coins as $coin) { echo "'$coin->name'".', '; } ?>],
+    coin: [<?php foreach($coins as $coin) { echo "'$coin->name - $coin->symbol'".', '; } ?>],
     exchange: [<?php foreach($exchanges as $exchange) { echo "'$exchange->name'".', '; } ?>],
   },
   computed: {
