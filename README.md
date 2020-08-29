@@ -18,6 +18,7 @@ Ver. 0.13.2 - 26.08.2020:PM - Add 'Trades' (MVCMR) first functions and design <b
 Ver. 1.14.2 - 26.08.2020:PM - Add Navbar, changes in Welcome page <br />
 Ver. 1.15.2 - 28.08.2020:PM - Add "PerCoins" View (cards), Controller, Model <br />
 Ver. 1.16.2 - 28.08.2020:PM - Changes in Navbar (burger fix (script)) and Welcome Page <br />
+Ver. 1.17.2 - 29.08.2020:AM - Work on "close trade",changes in active_trade view, migration (close_quantity), close_trade function, etc. <br />
 Ver. 
 
 ---

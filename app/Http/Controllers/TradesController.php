@@ -31,8 +31,19 @@ class TradesController extends Controller {
 
     public function closedTrades() {
 
-        $trades = Trades::where('is_active', 0)->get();
-        return view('trades.closed')->withTrades($trades);
+        $trades = Trades::where('is_active', 0)->orderBy('coin_id')->get();
+        $coins = Coins::where('is_active', 1)->get();
+        $coinss = '';
+
+        foreach($coins as $coin) {
+            $coinss .= $coin->api_link.",";
+        }
+
+        // GET Current prices from CoinGecko API
+        $client = new CoinGeckoClient();
+        $data = $client->simple()->getPrice($coinss, 'usd');
+
+        return view('trades.closed')->withTrades($trades)->withData($data);
 
     }
 
@@ -41,18 +52,28 @@ class TradesController extends Controller {
         $trades = Trades::where('is_active', 1)->get();
 
         $coins = Coins::where('is_active', 1)->get();
+
+
+
         $coinss = '';
+
         foreach($coins as $coin) {
             $coinss .= $coin->api_link.",";
         }
 
+       
+        // GET Current prices from CoinGecko API
         $client = new CoinGeckoClient();
         $data = $client->simple()->getPrice($coinss, 'usd');
+        
+
+            
 
         return view('trades.per_coins')
             ->withCoins($coins)
             ->withTrades($trades)
-            ->withData($data);
+           ->withData($data)
+            ;
 
     }
 
@@ -92,13 +113,34 @@ class TradesController extends Controller {
         return view('trades.edit');
     }
 
-    public function delete(Trades $trades) {
+    public function delete(Trades $trades, Request $request) {
 
-        $trades->is_active = 0;
-        $trades->save();
-        
-        Session::flash('deleted');
-        return redirect()->back();
+        // IF user close partial quantity
+        if($request->quantity < $trades->quantity) {
+            // --- sum new quantity
+            $quantity = $trades->quantity - $request->quantity;
+            // --- make NEW trade with old data and new quantity
+            $trade = new Trades;
+            $trade->exchange_id = $trades->exchange_id;
+            $trade->coin_id = $trades->coin_id;
+            $trade->open_price = $trades->open_price;
+            $trade->quantity = $quantity;
+            $trade->save();
+            // --- update CURRENT trade and make it unactive
+            $trades->close_quantity = $request->quantity;
+            $trades->close_price = $request->close_price;
+            $trades->is_active = 0;
+            $trades->save();
+
+        // ELSE update CURRENT trade and make it unactive
+        } else {
+            $trades->close_quantity = $request->quantity;
+            $trades->close_price = $request->close_price;
+            $trades->is_active = 0;
+            $trades->save();
+        }
+        Session::flash('updated'); // Flash UI Toast message
+        return redirect()->back(); // Return back to active trades
     }
 
 }

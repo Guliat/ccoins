@@ -8,6 +8,6 @@ class Coins extends Model
 {
     public function trades()
     {
-        return $this->hasMany('App\Trades', 'coin_id');
+        return $this->hasMany('App\Trades', 'coin_id')->where('is_active', 1);
     }
 }
