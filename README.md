@@ -25,7 +25,8 @@ Ver. 1.18.3 - 29.08.2020:PM - Add Authentication, controllers, views, changes in
 Ver. 1.19.3 - 30.08.2020:AM - Add current price in coins.index <br />
 Ver. 1.20.3 - 30.08.2020:AM - Add coin symbol for autocomplete search in trades.create <br />
       Fix 4 - 30.08.2020:PM - Explode coin name from symbol when submit trades.create (controller) <br />
-Ver. 
+      Fix 5 - 30.08.2020:PM - Change 'quantity' to 'close quantity' in closed trades view <br />
+      
 
 ---
 Version 1.14.2 - First fully functional version (must work :D - NOT TESTED with pulling, etc.) <br />

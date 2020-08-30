@@ -6,7 +6,7 @@
     <thead class="is-uppercase is-size-6">
       <th>exchange</th>
       <th>coin</th>
-      <th>quantity</th>
+      <th>closed quantity</th>
       <th>close price</th>
       <th>profit</th>
     </thead>
@@ -14,7 +14,7 @@
     <tr>
       <td>{{ $trade->exchange->name }}</td>
       <td>{{ $trade->coin->symbol }}</td>
-      <td>{{ $trade->quantity }}</td>
+      <td>{{ $trade->close_quantity }}</td>
       <td>${{ $trade->close_price }}</td>
       <td>${{ number_format(($trade->close_quantity*$trade->close_price) - ($trade->close_quantity*$trade->open_price), 2) }}</td>
     </tr>
