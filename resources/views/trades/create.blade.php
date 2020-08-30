@@ -48,7 +48,7 @@
           <div class="py-3"></div>
   
           <b-field label="OPEN PRICE" label-position="on-border">
-            <b-input placeholder="$0.039" name="open_price"></b-input>
+            <b-input placeholder="$0.000039" name="open_price"></b-input>
           </b-field>
 
             <div class="field is-grouped pt-4">

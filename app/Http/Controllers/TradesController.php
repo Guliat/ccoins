@@ -99,9 +99,10 @@ class TradesController extends Controller {
             'coin' => 'required',
             'quantity' => 'required',
         ));
-
+        
+        $coin_name = explode(' - ',trim($request->coin));
         $exchange = Exchanges::where('name', $request->exchange)->first('id');
-        $coin = Coins::where('name', $request->coin)->first('id');
+        $coin = Coins::where('name', $coin_name[0])->first('id');       
 
         $trade = new Trades;
         $trade->exchange_id = $exchange->id;
@@ -113,7 +114,7 @@ class TradesController extends Controller {
         Session::flash('added');
         return redirect()->route('trades.active');
     }
-
+    
     public function edit(Trades $trades) {
         return view('trades.edit');
     }

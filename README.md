@@ -24,6 +24,7 @@ Ver. 1.17.3 - 29.08.2020:PM - Add Laravel errors views and change design a littl
 Ver. 1.18.3 - 29.08.2020:PM - Add Authentication, controllers, views, changes in design to work with it. (must run composer)<br />
 Ver. 1.19.3 - 30.08.2020:AM - Add current price in coins.index <br />
 Ver. 1.20.3 - 30.08.2020:AM - Add coin symbol for autocomplete search in trades.create <br />
+      Fix 4 - 30.08.2020:PM - Explode coin name from symbol when submit trades.create (controller) <br />
 Ver. 
 
 ---
