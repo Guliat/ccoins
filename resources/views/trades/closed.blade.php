@@ -29,8 +29,11 @@
       </td>
       <td>
         @if($trade->bitcoin_price)
-          <span class="is-size-5">${{ number_format($trade->bitcoin_quantity*$trade->bitcoin_price, 2) }}</span>
-          <br /><span class="tag is-danger mt-1">When Coverted !</span>
+          <span class="is-size-5">
+            ${{ number_format(($trade->bitcoin_quantity*$trade->bitcoin_price)-($trade->quantity*$trade->open_price), 2) }}
+          </span>
+          <br />
+          <span class="tag is-danger mt-1">When Coverted !</span>
         @else
           ${{ number_format(($trade->close_quantity*$trade->close_price) - ($trade->close_quantity*$trade->open_price), 2) }}
         @endif
