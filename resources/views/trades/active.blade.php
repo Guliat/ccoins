@@ -32,7 +32,7 @@
         <div class="buttons has-addons">
           <b-modal v-model="sell_modal{{ $trade->id }}" has-modal-card trap-focus :destroy-on-hide="false" aria-role="dialog" aria-modal>
             <div class="modal-card" style="width: 350px">
-              <form action="{{ route('trades.sell', $trade->id) }}'" method="post">
+              <form action="{{ route('trades.sell', $trade->id) }}" method="post">
               @csrf
               @method('put')
                 <header class="modal-card-head">Sell to USD (can sell only a part)</header>
@@ -57,7 +57,7 @@
           </button>
           <b-modal v-model="convert_modal{{ $trade->id }}" has-modal-card trap-focus :destroy-on-hide="false" aria-role="dialog" aria-modal>
             <div class="modal-card" style="width: 350px">
-              <form action="{{ route('trades.convert', $trade->id) }}'" method="post">
+              <form action="{{ route('trades.convert', $trade->id) }}" method="post">
               @csrf
               @method('put')
                 <header class="modal-card-head">Convert to Bitcoin  (can convert only a part)</header>

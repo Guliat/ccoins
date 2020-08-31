@@ -28,6 +28,7 @@ Ver. 1.21.3 - 30.08.2020:AM - Add coin symbol for autocomplete search in trades.
       Fix 4 - 30.08.2020:PM - Explode coin name from symbol when submit trades.create (controller) <br />
       Fix 5 - 30.08.2020:PM - Change 'quantity' to 'close quantity' in closed trades view <br />
 Ver. 1.22.5 - 31.08.2020:PM - Add convert to Bitcoin functions in trades (mVCMR) <br />
+      Fix 6 - 31.08.2020:PM - Fix extra quote from sell and convert forms in trades.active <br />
 Ver. 
 
 -
