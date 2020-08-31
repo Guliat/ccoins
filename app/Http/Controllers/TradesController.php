@@ -119,8 +119,52 @@ class TradesController extends Controller {
         return view('trades.edit');
     }
 
-    public function delete(Trades $trades, Request $request) {
+    public function convert(Trades $trades, Request $request) {
+        // IF user close partial quantity
+        if($request->quantity < $trades->quantity) {
+            // --- sum new quantity
+            $quantity = $trades->quantity - $request->quantity;
+            // --- make NEW Bitcoin trade
+            $trade = new Trades;
+            $trade->exchange_id = $trades->exchange_id;
+            $trade->coin_id = 1;
+            $trade->open_price = $request->bitcoin_price;
+            $trade->quantity = $request->bitcoin_quantity;
+            $trade->save();
+            // --- make NEW converted coin trade with new quantity
+            $trade = new Trades;
+            $trade->exchange_id = $trades->exchange_id;
+            $trade->coin_id = $trades->coin_id;
+            $trade->open_price = $trades->open_price;
+            $trade->quantity = $quantity;
+            $trade->save();
+            // --- update converted coin trade and make it unactive
+            $trades->close_quantity = $request->quantity;
+            $trades->bitcoin_quantity = $request->bitcoin_quantity;
+            $trades->bitcoin_price = $request->bitcoin_price;
+            $trades->is_active = 0;
+            $trades->save();
+        } else {
+            // --- make NEW Bitcoin trade
+            $trade = new Trades;
+            $trade->exchange_id = $trades->exchange_id;
+            $trade->coin_id = 1;
+            $trade->open_price = $request->bitcoin_price;
+            $trade->quantity = $request->bitcoin_quantity;
+            $trade->save();
+            // --- update converted coin trade and make it unactive
+            $trades->close_quantity = $request->quantity;
+            $trades->bitcoin_quantity = $request->bitcoin_quantity;
+            $trades->bitcoin_price = $request->bitcoin_price;
+            $trades->is_active = 0;
+            $trades->save();
 
+        }
+        Session::flash('updated'); // Flash UI Toast message
+        return redirect()->back(); // Return back to active trades
+    }
+
+    public function sell(Trades $trades, Request $request) {
         // IF user close partial quantity
         if($request->quantity < $trades->quantity) {
             // --- sum new quantity
@@ -132,12 +176,11 @@ class TradesController extends Controller {
             $trade->open_price = $trades->open_price;
             $trade->quantity = $quantity;
             $trade->save();
-            // --- update CURRENT trade and make it unactive
+            // update CURRENT trade and make it unactive
             $trades->close_quantity = $request->quantity;
             $trades->close_price = $request->close_price;
             $trades->is_active = 0;
             $trades->save();
-
         // ELSE update CURRENT trade and make it unactive
         } else {
             $trades->close_quantity = $request->quantity;
