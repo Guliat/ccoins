@@ -25,9 +25,11 @@
       <td>
         {{ $trade->quantity }}
         <br />
-        <span class="tag is-warning">
-          From {{ $trade->trade->close_quantity }} {{ $trade->trade->coin->symbol }}
-        </span>
+        @if($trade->referal_trade_id)
+          <span class="tag is-warning">
+            From {{ $trade->trade->close_quantity }} {{ $trade->trade->coin->symbol }}
+          </span>
+        @endif
       </td>
       <td>${{ $trade->open_price }}</td>
       <td>{{ $trade->open_at }}</td>

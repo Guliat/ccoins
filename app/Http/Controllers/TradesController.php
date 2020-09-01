@@ -130,6 +130,7 @@ class TradesController extends Controller {
             $trade->coin_id = 1;
             $trade->open_price = $request->bitcoin_price;
             $trade->quantity = $request->bitcoin_quantity;
+            $trade->referal_trade_id = $trades->id;
             $trade->save();
             // --- make NEW converted coin trade with new quantity
             $trade = new Trades;
@@ -151,6 +152,7 @@ class TradesController extends Controller {
             $trade->coin_id = 1;
             $trade->open_price = $request->bitcoin_price;
             $trade->quantity = $request->bitcoin_quantity;
+            $trade->referal_trade_id = $trades->id;
             $trade->save();
             // --- update converted coin trade and make it unactive
             $trades->close_quantity = $request->quantity;
