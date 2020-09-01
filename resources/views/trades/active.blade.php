@@ -22,7 +22,13 @@
       <td>
         ${{ $data[$trade->coin->api_link]['usd'] }}
       </td>
-      <td>{{ $trade->quantity }}</td>
+      <td>
+        {{ $trade->quantity }}
+        <br />
+        <span class="tag is-warning">
+          From {{ $trade->trade->close_quantity }} {{ $trade->trade->coin->symbol }}
+        </span>
+      </td>
       <td>${{ $trade->open_price }}</td>
       <td>{{ $trade->open_at }}</td>
       <td>${{ number_format($trade->quantity*$trade->open_price, 6) }}</td>

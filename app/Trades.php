@@ -15,4 +15,9 @@ class Trades extends Model
     {
         return $this->belongsTo('App\Coins', 'coin_id');
     }
+
+    public function trade()
+    {
+        return $this->belongsTo('App\Trades', 'referal_trade_id');
+    }
 }

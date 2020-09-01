@@ -15,11 +15,11 @@ Fix 2 -  24.08.2020:PM - Fix extra quote in undelete-form-action <br />
 0.10.2 - 24.08.2020:PM - Add Toasts for Add, Update, Delete, Undelete <br />
 0.11.2 - 24.08.2020:PM - Add 'Exchanges' (mVCmR) first functions and design <br />
 0.12.2 - 26.08.2020:PM - Add CoinGecko API (Composer) <br />
-0.13.2 - 26.08.2020:PM - Add 'Trades' (MVCMR) first functions and design <br />
+0.13.2 - 26.08.2020:PM - Add 'Trades' (MVCMR) first functions and design (run migration) <br />
 1.14.2 - 26.08.2020:PM - Add Navbar, changes in Welcome page <br />
 1.15.2 - 28.08.2020:PM - Add "PerCoins" View (cards), Controller, Model <br />
 1.16.2 - 28.08.2020:PM - Changes in Navbar (burger fix (script)) and Welcome Page <br />
-1.17.2 - 29.08.2020:AM - Work on "close trade",changes in active_trade view, migration (close_quantity), close_trade function, etc. <br />
+1.17.2 - 29.08.2020:AM - Work on "close trade",changes in active_trade view, migration (close_quantity), close_trade function, etc. (run migration) <br />
  Fix 3 - Change "steps" from 6 to 8 in number inputs when close trade <br />
 1.18.3 - 29.08.2020:PM - Add Laravel errors views and change design a little <br />
 1.19.3 - 29.08.2020:PM - Add Authentication, controllers, views, changes in design to work with it. (must run composer)<br />
@@ -27,10 +27,10 @@ Fix 2 -  24.08.2020:PM - Fix extra quote in undelete-form-action <br />
 1.21.3 - 30.08.2020:AM - Add coin symbol for autocomplete search in trades.create <br />
  Fix 4 - 30.08.2020:PM - Explode coin name from symbol when submit trades.create (controller) <br />
  Fix 5 - 30.08.2020:PM - Change 'quantity' to 'close quantity' in closed trades view <br />
-1.22.5 - 31.08.2020:PM - Add convert to Bitcoin functions in trades (mVCMR) <br />
+1.22.5 - 31.08.2020:PM - Add convert to Bitcoin functions in trades (mVCMR) (run migration ) <br />
  Fix 6 - 31.08.2020:PM - Fix extra quote from sell and convert forms in trades.active <br />
  Fix 7 - 31.08.2020:PM - Fix Profit in closed trades view <br />
- 
+1.23.7 - 01.09.2020:PM - Add referal_trade_id migration, change view trades.active, change model Trades (run migration)<br />
 
 -
 Version 1.14.2 - First fully functional version (must work :D - NOT TESTED with pulling, etc.) <br />
