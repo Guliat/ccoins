@@ -7,18 +7,28 @@
 </div>
 <div class="columns is-multiline">
   @foreach ($coins as $coin)
-    <div class="column is-one-quarter-fullhd is-one-third-desktop has-text-centered">
+  <div class="column is-one-quarter-fullhd is-one-third-desktop has-text-centered">
     <div class="box @if($coin->is_active == 0) notification is-danger is-light @endif">
         <div class="columns">
-              <div class="column is-3 is-size-5 has-text-centered">
-                  <a class="icon has-tooltip-arrow has-tooltip-info has-text-info" data-tooltip="{{ $coin->api_link }}" style="text-decoration: none;">
-                    <i class="fas fa-link"></i>
-                  </a>
-                  <br />
+          <div class="column is-3 is-size-5 has-text-centered">
+            <a class="icon has-tooltip-arrow has-tooltip-info has-text-info" data-tooltip="{{ $coin->api_link }}" style="text-decoration: none;">
+              <i class="fas fa-link"></i>
+            </a>
+            <br />
                   {{ $coin->symbol }}
-                </div>
+              </div>
               <div class="column is-7 is-size-5 has-text-centered">
-                  {{ $coin->name }} <br /> ${{ $data[$coin->api_link]['usd'] }}
+                  @if(!empty($coin->trades))
+                    <?php $total_quantity = null; ?>
+                      @foreach($coin->trades as $trade)
+                        <?php $total_quantity += $trade->quantity; ?>
+                      @endforeach
+                      {{ $total_quantity }}
+                  @endif
+                  <br />  
+                  {{ $coin->name }}
+                  <br />
+                  ${{ $data[$coin->api_link]['usd'] }}
               </div>
               <div class="column is-2 has-text-right mt-2">
                 @if($coin->is_active == 1)

@@ -32,7 +32,8 @@ Fix 2 -  24.08.2020:PM - Fix extra quote in undelete-form-action <br />
  Fix 7 - 31.08.2020:PM - Fix Profit in closed trades view <br />
 1.23.7 - 01.09.2020:PM - Add referal_trade_id migration, change view trades.active, change model Trades (run migration)<br />
  Fix 8 - 01.09.2020:PM - Fix trades.active (if there referal trade), add referal_trade to controller.convert <br />
- 
+1.24.8 - 01.09.2020:PM - Add "total quantity" on active trades in coins.index <br />
+
 -
 Version 1.14.2 - First fully functional version (must work :D - NOT TESTED with pulling, etc.) <br />
 EDIT (1.14.2) - Tested on Ubuntu with nginx - It Works. <br />
