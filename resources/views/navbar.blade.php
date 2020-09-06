@@ -1,4 +1,4 @@
-<nav class="navbar is-fixed-top is-dark nunito" role="navigation" aria-label="main navigation">
+<nav class="navbar is-fixed-top @if(Auth::id() == 1) is-danger @else is-dark @endif nunito" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="{{ url('/') }}">
       <span class="is-size-4 pl-5">Ccoins App</span>
@@ -36,33 +36,41 @@
 
   <div class="navbar-end pr-3">
     @if(Auth::check())
-    <a href="{{ route('trades.create') }}" class="navbar-item">
-      Add Trade
-    </a>
-    <a href="{{ route('trades.active') }}" class="navbar-item">
-      Active Trades
-    </a>
-    <a href="{{ route('trades.closed') }}" class="navbar-item">
-      Closed Trades
-    </a>
-    <a href="#" class="navbar-item">
-      Trades per Exchange
-    </a>
-    <a href="{{ route('trades.coins') }}" class="navbar-item">
-      Trades per Coins
-    </a>
-    <b class="navbar-item"> | </b>
+      @if(Auth::id() != 1)
+        <a href="{{ route('trades.create') }}" class="navbar-item">
+          Add Trade
+        </a>
+        <a href="{{ route('trades.active') }}" class="navbar-item">
+          Active Trades
+        </a>
+        <a href="{{ route('trades.closed') }}" class="navbar-item">
+          Closed Trades
+        </a>
+        <a href="{{ route('trades.exchanges') }}" class="navbar-item">
+          Trades per Exchange
+        </a>
+        <a href="{{ route('trades.coins') }}" class="navbar-item">
+          Trades per Coins
+        </a>
+        <b class="navbar-item"> | </b>
+      @endif
     <div class="navbar-item">
       <div class="buttons">
-    <a class="button is-white is-outlined" href="{{ route('coins.index') }}">Coins</a>
-    <a class="button is-white is-outlined" href="{{ route('exchanges.index') }}" >Exchanges</a>
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" >
-      @csrf
-      <button type="submit" class="button is-white is-outlined">
-        <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
-      </button>
-    </form>
-      </div></div>
+        @if(Auth::id() == 1)
+        <a class="button is-white is-outlined" href="{{ route('manage.coins.index') }}">Coins</a>
+        <a class="button is-white is-outlined" href="{{ route('manage.exchanges.index') }}" >Exchanges</a>
+        @else
+        <a class="button is-white is-outlined" href="{{ route('coins.index') }}">Coins</a>
+        <a class="button is-white is-outlined" href="{{ route('exchanges.index') }}" >Exchanges</a>
+        @endif
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" >
+          @csrf
+          <button type="submit" class="button is-white is-outlined">
+            <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+          </button>
+        </form>
+      </div>
+    </div>
     @else
     <div class="navbar-item">
       <div class="buttons">

@@ -20,7 +20,7 @@
       <td>{{ $trade->exchange->name }}</td>
       <td>{{ $trade->coin->symbol }}</td>
       <td>
-        ${{ $data[$trade->coin->api_link]['usd'] }}
+        ${{ $trade->coin->price }}
       </td>
       <td>
         {{ $trade->quantity }}
@@ -34,8 +34,8 @@
       <td>${{ $trade->open_price }}</td>
       <td>{{ $trade->open_at }}</td>
       <td>${{ number_format($trade->quantity*$trade->open_price, 6) }}</td>
-      <td>${{ number_format($data[$trade->coin->api_link]['usd']*$trade->quantity, 6) }}</td>
-      <td>${{ number_format(($trade->quantity*$data[$trade->coin->api_link]['usd'])-($trade->quantity*$trade->open_price), 6) }}</td>
+      <td>${{ number_format($trade->coin->price*$trade->quantity, 6) }}</td>
+      <td>${{ number_format(($trade->quantity*$trade->coin->price)-($trade->quantity*$trade->open_price), 6) }}</td>
       <td>
         <div class="buttons has-addons">
           <b-modal v-model="sell_modal{{ $trade->id }}" has-modal-card trap-focus :destroy-on-hide="false" aria-role="dialog" aria-modal>
@@ -50,7 +50,7 @@
                     </b-field>
                     <div class="py-2"></div>
                     <b-field label="Sell Price (if different)" label-position="on-border">
-                      <b-input type="number" :value="{{ $data[$trade->coin->api_link]['usd'] }}" name="close_price" placeholder="Sell Price" required step="0.00000001"></b-input>
+                      <b-input type="number" :value="{{ $trade->coin->price }}" name="close_price" placeholder="Sell Price" required step="0.00000001"></b-input>
                     </b-field>
                 </section>
                 <footer class="modal-card-foot">
@@ -79,7 +79,7 @@
                   </b-field>
                   <div class="py-2"></div>
                   <b-field label="Bitcoin Price (if different)" label-position="on-border">
-                    <b-input type="number" :value="{{ $data['bitcoin']['usd'] }}" name="bitcoin_price" placeholder="Bitcoin Price" required step="0.00000001"></b-input>
+                    <b-input type="number" :value="{{ $bitcoin }}" name="bitcoin_price" placeholder="Bitcoin Price" required step="0.00000001"></b-input>
                   </b-field>
                 </section>
                 <footer class="modal-card-foot">

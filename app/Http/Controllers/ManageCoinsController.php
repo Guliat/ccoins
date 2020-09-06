@@ -5,7 +5,7 @@ use Session;
 use App\Coins;
 use Illuminate\Http\Request;
 
-class CoinsController extends Controller {
+class ManageCoinsController extends Controller {
     
     public function __construct() {
         $this->middleware('auth');
@@ -13,11 +13,11 @@ class CoinsController extends Controller {
     
     public function index() {
         $coins = Coins::all();
-        return view('coins.index')->withCoins($coins);
+        return view('manage.coins.index')->withCoins($coins);
     }
 
     public function create() {
-        return view('coins.create');
+        return view('manage.coins.create');
     }
 
     public function store(Request $request) {
@@ -35,11 +35,11 @@ class CoinsController extends Controller {
         $coins->save();
 
         Session::flash('added');
-        return redirect()->route('coins.index');
+        return redirect()->route('manage.coins.index');
     }
 
     public function edit(Coins $coins) {
-        return view('coins.edit')->withCoin($coins);
+        return view('manage.coins.edit')->withCoin($coins);
     }
 
     public function update(Request $request, Coins $coins) {
@@ -56,36 +56,6 @@ class CoinsController extends Controller {
         $coins->save();
 
         Session::flash('updated');
-        return redirect()->route('coins.index');
+        return redirect()->route('manage.coins.index');
     }
-
-    public function updatePrices() {
-        $coins = Coins::all();
-        $client = new CoinGeckoClient();
-        foreach($coins as $coin) {
-            $data = $client->simple()->getPrice($coin->api_link, 'usd');
-            $update = Coins::find($coin->id);
-            $update->price = $data[$coin->api_link]['usd'];
-            $update->save();
-        }
-    }
-
-    public function delete(Coins $coins) {
-
-        $coins->is_active = 0;
-        $coins->save();
-        
-        Session::flash('deleted');
-        return redirect()->back();
-    }
-
-    public function unDelete(Coins $coins) {
-        
-        $coins->is_active = 1;
-        $coins->save();
-        
-        Session::flash('undeleted');
-        return redirect()->back();
-    }
-
 }

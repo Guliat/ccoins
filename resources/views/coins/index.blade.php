@@ -28,7 +28,7 @@
                   <br />  
                   {{ $coin->name }}
                   <br />
-                  ${{ $data[$coin->api_link]['usd'] }}
+                  ${{ $coin->price }}
               </div>
               <div class="column is-2 has-text-right mt-2">
                 @if($coin->is_active == 1)

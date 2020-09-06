@@ -10,6 +10,14 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    public function coins() {
+		return $this->belongsToMany('App\Coins');
+    }
+
+    public function exchanges() {
+		return $this->belongsToMany('App\Exchanges');
+	}
+
     /**
      * The attributes that are mass assignable.
      *

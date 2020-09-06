@@ -2,84 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Session;
 use App\Coins;
 use App\Trades;
 use App\Exchanges;
 use Illuminate\Http\Request;
-use Codenixsv\CoinGeckoApi\CoinGeckoClient;
 
 class TradesController extends Controller {
     
-    public function __construct()
-    {
+    public function __construct() {
         $this->middleware('auth');
     }
     
     public function activeTrades() {
-        
-        $get_coins = Coins::select('api_link')->get();
-
-        $coins = '';
-        foreach($get_coins as $coin) {
-            $coins .= $coin->api_link.",";
-        }
-
-        $client = new CoinGeckoClient();
-        $data = $client->simple()->getPrice($coins, 'usd');
-       
-        $trades = Trades::where('is_active', 1)->get();
-
-        return view('trades.active')->withTrades($trades)->withData($data);
-
+        $trades = Trades::where('user_id', Auth::id())->where('is_active', 1)->get();
+        $bitcoin = Coins::where('name', 'bitcoin')->select('price')->first();
+        return view('trades.active')->withTrades($trades)->withBitcoin($bitcoin);
     }
 
     public function closedTrades() {
-
-        $trades = Trades::where('is_active', 0)->orderBy('coin_id')->get();
-        $coins = Coins::where('is_active', 1)->get();
-        $coinss = '';
-
-        foreach($coins as $coin) {
-            $coinss .= $coin->api_link.",";
-        }
-
-        // GET Current prices from CoinGecko API
-        $client = new CoinGeckoClient();
-        $data = $client->simple()->getPrice($coinss, 'usd');
-
-        return view('trades.closed')->withTrades($trades)->withData($data);
-
+        $trades = Trades::where('user_id', Auth::id())->where('is_active', 0)->orderBy('coin_id')->get();
+        return view('trades.closed')->withTrades($trades);
     }
 
     public function tradesPerCoins() {
+        return view('trades.per_coins');
+    }
 
-        $trades = Trades::where('is_active', 1)->get();
-
-        $coins = Coins::where('is_active', 1)->get();
-
-
-
-        $coinss = '';
-
-        foreach($coins as $coin) {
-            $coinss .= $coin->api_link.",";
-        }
-
-       
-        // GET Current prices from CoinGecko API
-        $client = new CoinGeckoClient();
-        $data = $client->simple()->getPrice($coinss, 'usd');
-        
-
-            
-
-        return view('trades.per_coins')
-            ->withCoins($coins)
-            ->withTrades($trades)
-           ->withData($data)
-            ;
-
+    public function tradesPerExchanges() {
+        return view('trades.per_exchanges');
     }
 
     public function create() {
