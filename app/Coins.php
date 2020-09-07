@@ -11,7 +11,7 @@ class Coins extends Model {
     }
 
     public function users() {
-        return $this->belongsToMany('App\User'); 
-	}
+        return $this->belongsToMany('App\User', 'users_coins', 'coin_id', 'user_id')->withTimestamps();
+    }
 
 }

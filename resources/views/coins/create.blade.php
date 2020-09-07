@@ -6,27 +6,27 @@
         <div class="column is-12 mt-5"></div>
         <div class="column is-4"></div>
         <div class="column is-4 box py-5 px-5">
-            <div class="field">
-                <label class="label">Symbol <small>(BTC)</small></label>
+            <div class="field" id="create_coin">
                 <div class="control">
-                    <input class="input" type="text" placeholder="BTC" name="symbol">
+                    <b-field label="SELECT COIN" label-position="on-border" type="is-info">
+                        <b-autocomplete
+                        name="coin"
+                        icon-pack="fa"
+                        icon="magic"
+                        v-model="coin_name"
+                        :data="filteredcoinArray"
+                        placeholder="autocomplete field"
+                        open-on-focus="openOnFocus"
+                        clearable="clearable"
+                        icon-right="caret-down"
+                        @select="option => selected = option">
+                        </b-autocomplete>
+                      </b-field>
                 </div>
             </div>
-            <div class="field">
-                <label class="label">Full Name <small>(Bitcoin)</small></label>
-                <div class="control">
-                    <input class="input" type="text" placeholder="Bitcoin" name="name">
-                </div>
-            </div>  
-            <div class="field">
-                <label class="label">API Link <small>(bitcoin)</small></label>
-                <div class="control">
-                    <input class="input" type="text" placeholder="bitcoin" name="api_link">
-                </div>
-            </div> 
             <div class="field is-grouped pt-4">
                 <div class="control">
-                    <button type="submit" class="button is-success ">Create</button>
+                    <button type="submit" class="button is-success ">Add</button>
                 </div>
                 <div class="control">
                     <a href={{ route('coins.index') }} class="button is-danger is-outlined">Cancel</a>
@@ -36,4 +36,26 @@
         <div class="column is-4"></div>
     </div>
 </form>
+@endsection
+@section('scripts')
+<script>
+new Vue({
+  el: '#create_coin',
+  data: {
+    coin_name: '',
+    selected: null,
+    coin: [<?php foreach($coins as $coin) { echo "'$coin->name'".', '; } ?>],
+  },
+  computed: {
+    filteredcoinArray() {
+      return this.coin.filter((option) => {
+      return option
+        .toString()
+        .toLowerCase()
+        .indexOf(this.coin_name.toLowerCase()) >= 0
+      })
+    }
+  },
+});
+</script>
 @endsection

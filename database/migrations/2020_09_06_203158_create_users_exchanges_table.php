@@ -15,8 +15,10 @@ class CreateUsersExchangesTable extends Migration
     {
         Schema::create('users_exchanges', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('user_id');
-            $table->unsignedInteger('exchange_id');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('exchange_id');
+            $table->foreign('exchange_id')->references('id')->on('exchanges');
             $table->unsignedTinyInteger('sort_position')->nullable();
             $table->unsignedTinyInteger('is_active')->default('1');
             $table->timestamps();

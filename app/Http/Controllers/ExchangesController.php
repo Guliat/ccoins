@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use Session;
+use App\User;
 use App\Exchanges;
 use Illuminate\Http\Request;
 
@@ -13,61 +14,22 @@ class ExchangesController extends Controller {
     }
 
     public function index() {
-        $exchanges = Exchanges::all();
-        
+        $user = User::find(Auth::id());
+        $exchanges = $user->exchanges;
         return view('exchanges.index')->withExchanges($exchanges);
     }
 
     public function create() {
-        return view('exchanges.create');
+        $exchanges = Exchanges::all();
+        return view('exchanges.create')->withExchanges($exchanges);
     }
 
     public function store(Request $request) {
-
-        $this->validate($request, array(
-            'name' => 'required|max:255|unique:exchanges,name',
-        ));
-
-        $exchanges = new Exchanges;
-        $exchanges->name = $request->name;
-        $exchanges->save();
-
+        $exchange = Exchanges::where('name', $request->exchange)->select('id')->first();
+        $store = User::find(Auth::id());
+        $store->exchanges()->sync($exchange, false);
         Session::flash('added');
         return redirect()->route('exchanges.index');
     }
 
-    public function edit(Exchanges $exchanges) {
-        return view('exchanges.edit')->withExchange($exchanges);
-    }
-
-    public function update(Request $request, Exchanges $exchanges) {
-
-        $this->validate($request, array(
-            'name' => 'required|max:255|unique:exchanges,name',
-        ));
-
-        $exchanges->name = $request->name;
-        $exchanges->save();
-
-        Session::flash('updated');
-        return redirect()->route('exchanges.index');
-    }
-
-    public function delete(Exchanges $exchanges) {
-
-        $exchanges->is_active = 0;
-        $exchanges->save();
-        
-        Session::flash('deleted');
-        return redirect()->back();
-    }
-
-    public function unDelete(Exchanges $exchanges) {
-        
-        $exchanges->is_active = 1;
-        $exchanges->save();
-        
-        Session::flash('undeleted');
-        return redirect()->back();
-    }
 }

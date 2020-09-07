@@ -16,6 +16,7 @@ Fix 2 -  24.08.2020:PM - Fix extra quote in undelete-form-action <br />
 0.11.2 - 24.08.2020:PM - Add 'Exchanges' (mVCmR) first functions and design <br />
 0.12.2 - 26.08.2020:PM - Add CoinGecko API (Composer) <br />
 0.13.2 - 26.08.2020:PM - Add 'Trades' (MVCMR) first functions and design (run migration) <br />
+Version 1
 1.14.2 - 26.08.2020:PM - Add Navbar, changes in Welcome page <br />
 1.15.2 - 28.08.2020:PM - Add "PerCoins" View (cards), Controller, Model <br />
 1.16.2 - 28.08.2020:PM - Changes in Navbar (burger fix (script)) and Welcome Page <br />
@@ -33,6 +34,9 @@ Fix 2 -  24.08.2020:PM - Fix extra quote in undelete-form-action <br />
 1.23.7 - 01.09.2020:PM - Add referal_trade_id migration, change view trades.active, change model Trades (run migration)<br />
  Fix 8 - 01.09.2020:PM - Fix trades.active (if there referal trade), add referal_trade to controller.convert <br />
 1.24.8 - 01.09.2020:PM - Add "total quantity" on active trades in coins.index <br />
+Version 2
+2.24.8 - 06-07.09.2020
+ - Add manage pages, add manage controllers, add migrations (userID to trade, price to coins, users_coins, users_exchanges), <br />
 
 -
 Version 1.14.2 - First fully functional version (must work :D - NOT TESTED with pulling, etc.) <br />

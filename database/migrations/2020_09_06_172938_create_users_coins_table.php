@@ -15,14 +15,15 @@ class CreateUsersCoinsTable extends Migration
     {
         Schema::create('users_coins', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('user_id');
-            $table->unsignedInteger('coin_id');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('coin_id');
+            $table->foreign('coin_id')->references('id')->on('coins');
             $table->unsignedTinyInteger('sort_position')->nullable();
             $table->unsignedTinyInteger('is_active')->default('1');
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *

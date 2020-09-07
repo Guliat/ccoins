@@ -31,21 +31,13 @@ Route::put('/trades/convert/{trades}', 'TradesController@convert')->name('trades
 // COINS
 Route::get('/coins', 'CoinsController@index')->name('coins.index');
 Route::get('/coins/create', 'CoinsController@create')->name('coins.create');
-Route::get('/coins/edit/{coins}', 'CoinsController@edit')->name('coins.edit');
 Route::post('/coins/store', 'CoinsController@store')->name('coins.store');
-Route::put('/coins/update/{coins}', 'CoinsController@update')->name('coins.update');
-Route::put('/coins/delete/{coins}', 'CoinsController@delete')->name('coins.delete');
-Route::put('/coins/undelete/{coins}', 'CoinsController@unDelete')->name('coins.undelete');
 Route::get('/coins/update_prices', 'CoinsController@updatePrices')->name('coins.update.prices');
 
 // EXCHANGES
 Route::get('/exchanges', 'ExchangesController@index')->name('exchanges.index');
 Route::get('/exchanges/create', 'ExchangesController@create')->name('exchanges.create');
-Route::get('/exchanges/edit/{exchanges}', 'ExchangesController@edit')->name('exchanges.edit');
 Route::post('/exchanges/store', 'ExchangesController@store')->name('exchanges.store');
-Route::put('/exchanges/update/{exchanges}', 'ExchangesController@update')->name('exchanges.update');
-Route::put('/exchanges/delete/{exchanges}', 'ExchangesController@delete')->name('exchanges.delete');
-Route::put('/exchanges/undelete/{exchanges}', 'ExchangesController@unDelete')->name('exchanges.undelete');
 
 // MANAGE
 Route::prefix('manage')->group(function() {
