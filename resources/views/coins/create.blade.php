@@ -44,7 +44,7 @@ new Vue({
   data: {
     coin_name: '',
     selected: null,
-    coin: [<?php foreach($coins as $coin) { echo "'$coin->name'".', '; } ?>],
+    coin: [<?php foreach($coins as $coin) { echo "'$coin->name - $coin->symbol'".', '; } ?>],
   },
   computed: {
     filteredcoinArray() {

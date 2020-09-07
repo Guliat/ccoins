@@ -27,7 +27,8 @@ class CoinsController extends Controller {
     }
 
     public function store(Request $request) {
-        $coin = Coins::where('name', $request->coin)->select('id')->first();
+        $coin_name = explode(' - ',trim($request->coin));
+        $coin = Coins::where('name', $coin_name[0])->first('id');
         $store = User::find(Auth::id());
         $store->coins()->sync($coin, false);
         Session::flash('added');

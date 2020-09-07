@@ -37,7 +37,7 @@ Version 1
 Version 2
 2.24.8 - 06-07.09.2020 - Split all.coins_exchanges to user.coins_exchanges, make manage pages (coins, exchanges), remove buefy styles (override bulma problem), change navbar to admin / user styles, add coin price in database + update price (cron must be add to server), clear unused routes and functions from controllers, etc... <br />
  Fix 9 - 07.09.2020:PM - Fix manage routes "manage.... to Manage...."
- 
+2.25.9 - 07.09.2020:PM - Add coin symbol to autocomplete in coins.create 
 -
 Version 1.14.2 - First fully functional version (must work :D - NOT TESTED with pulling, etc.) <br />
 EDIT (1.14.2) - Tested on Ubuntu with nginx - It Works. <br />
