@@ -1,8 +1,8 @@
-<h1>Cryptocurrencies Portfolio Watchlist</h1>
-You can find it on <a href="http://ccoins.gwms.eu">THIS</a> page.
+<h2>Cryptocurrencies Portfolio Watchlist</h2>
+You can find it on <a href="http://ccoins.gwms.eu" target="_blank">THIS</a> page.
 <br />
-Version naming - Versions.Updates.Fixes <br />
----
+
+-
 0.1.0 -  22.08.2020:AM - Install Fresh Laravel 7.25 <br />
 0.2.0 -  23.08.2020:AM - Add Bulma CSS Framework from CDN, first changes on defualt Welcome Page <br />
 0.3.0 -  23.08.2020:AM - Split default welcome page to head, main, welcome <br />
@@ -42,5 +42,7 @@ Version 2
 2.25.9 - 07.09.2020:PM - Add coin symbol to autocomplete in coins.create 
 
 -
+Version naming = Versions.Updates.Fixes <br /><br />
 Version 1.14.2 - First fully functional version (must work :D - NOT TESTED with pulling, etc.) <br />
 EDIT (1.14.2) - Tested on Ubuntu with nginx - It Works. <br />
+Version 2.25.9 - First version to test with users. <br />
