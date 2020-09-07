@@ -35,8 +35,7 @@ Version 1
  Fix 8 - 01.09.2020:PM - Fix trades.active (if there referal trade), add referal_trade to controller.convert <br />
 1.24.8 - 01.09.2020:PM - Add "total quantity" on active trades in coins.index <br />
 Version 2
-2.24.8 - 06-07.09.2020
- - Add manage pages, add manage controllers, add migrations (userID to trade, price to coins, users_coins, users_exchanges), <br />
+2.24.8 - 06-07.09.2020 - Split all.coins_exchanges to user.coins_exchanges, make manage pages (coins, exchanges), remove buefy styles (override bulma problem), change navbar to admin / user styles, add coin price in database + update price (cron must be add to server), clear unused routes and functions from controllers, etc... <br />
 
 -
 Version 1.14.2 - First fully functional version (must work :D - NOT TESTED with pulling, etc.) <br />

@@ -5,7 +5,7 @@
   <title>CCoins</title>
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300&display=swap" rel="stylesheet">
   <!-- Styles -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
   <link href="{{ asset('/') }}css/app.css" rel="stylesheet">
@@ -13,8 +13,8 @@
       html, body {
           background-color: #fff;
           color: #636b6f;
-          font-family: 'Nunito', sans-serif;
-          font-weight: 200;
+          font-family: 'Exo 2', sans-serif;
+          font-weight: 300;
           height: 100vh;
           margin: 0;
       }

@@ -3,7 +3,8 @@
 <div class="pt-5"></div>
 <div class="content subtitle is-size-6 box" id="close_trade">
   <table class="table is-hoverable">
-    <thead class="is-uppercase is-size-6">
+    <thead class="is-uppercase">
+      <th></th>
       <th>exchange</th>
       <th>coin</th>
       <th>current price</th>
@@ -17,6 +18,33 @@
     </thead>
     @foreach($trades as $trade)
     <tr>
+      <td>
+        <b-modal v-model="edit_modal{{ $trade->id }}" has-modal-card trap-focus :destroy-on-hide="false" aria-role="dialog" aria-modal>
+          <div class="modal-card" style="width: 350px">
+            <form action="{{ route('trades.update', $trade->id) }}" method="post">
+            @csrf
+            @method('put')
+              <header class="modal-card-head">Edit trade</header>
+              <section class="modal-card-body">
+                  <b-field label="Quantity" label-position="on-border">
+                      <b-input type="number" :value="{{ $trade->quantity }}" name="quantity" required step="0.00000001" ></b-input>
+                  </b-field>
+                  <div class="py-2"></div>
+                  <b-field label="Open Price" label-position="on-border">
+                    <b-input type="number" :value="{{ $trade->open_price }}" name="open_price" required step="0.000001"></b-input>
+                  </b-field>
+              </section>
+              <footer class="modal-card-foot">
+                <button type="submit" class="button is-success">Save</button>
+                <a class="button is-danger is-outlined" @click="edit_modal{{ $trade->id }} = false">Cancel</a>
+              </footer>
+            </form>
+          </div>
+        </b-modal>
+        <button class="button is-primary is-outlined is-small has-tooltip-arrow has-tooltip-dark" data-tooltip="Edit this trade" @click="edit_modal{{ $trade->id }} = true">
+          EDIT
+        </button>
+      </td>
       <td>{{ $trade->exchange->name }}</td>
       <td>{{ $trade->coin->symbol }}</td>
       <td>
@@ -50,7 +78,7 @@
                     </b-field>
                     <div class="py-2"></div>
                     <b-field label="Sell Price (if different)" label-position="on-border">
-                      <b-input type="number" :value="{{ $trade->coin->price }}" name="close_price" placeholder="Sell Price" required step="0.00000001"></b-input>
+                      <b-input type="number" :value="{{ $trade->coin->price }}" name="close_price" placeholder="Sell Price" required step="0.000001"></b-input>
                     </b-field>
                 </section>
                 <footer class="modal-card-foot">
@@ -79,7 +107,7 @@
                   </b-field>
                   <div class="py-2"></div>
                   <b-field label="Bitcoin Price (if different)" label-position="on-border">
-                    <b-input type="number" :value="{{ $bitcoin }}" name="bitcoin_price" placeholder="Bitcoin Price" required step="0.00000001"></b-input>
+                    <b-input type="number" :value="{{ $bitcoin }}" name="bitcoin_price" placeholder="Bitcoin Price" required step="0.000001"></b-input>
                   </b-field>
                 </section>
                 <footer class="modal-card-foot">
@@ -104,7 +132,7 @@
 new Vue({
   el: '#close_trade',
   data: {
-    <?php foreach($trades as $trade) { echo 'sell_modal'.$trade->id.': false, '; echo 'convert_modal'.$trade->id.': false, '; } ?>
+    <?php foreach($trades as $trade) { echo 'edit_modal'.$trade->id.': false, '; echo 'sell_modal'.$trade->id.': false, '; echo 'convert_modal'.$trade->id.': false, '; } ?>
     },
 })
 </script>

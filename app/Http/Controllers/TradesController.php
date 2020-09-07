@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use Session;
+use App\User;
 use App\Coins;
 use App\Trades;
 use App\Exchanges;
@@ -36,8 +37,9 @@ class TradesController extends Controller {
 
     public function create() {
 
-        $coins = Coins::where('is_active', 1)->get();
-        $exchanges = Exchanges::where('is_active', 1)->get();
+        $user = User::find(Auth::id());
+        $coins = $user->coins;
+        $exchanges = $user->exchanges;
 
         return view('trades.create')
             ->withCoins($coins)
@@ -57,6 +59,7 @@ class TradesController extends Controller {
         $coin = Coins::where('name', $coin_name[0])->first('id');       
 
         $trade = new Trades;
+        $trade->user_id = Auth::id();
         $trade->exchange_id = $exchange->id;
         $trade->coin_id = $coin->id;
         $trade->quantity = $request->quantity;
@@ -66,84 +69,109 @@ class TradesController extends Controller {
         Session::flash('added');
         return redirect()->route('trades.active');
     }
-    
-    public function edit(Trades $trades) {
-        return view('trades.edit');
+
+    public function update(Trades $trades, Request $request) {
+        if($request->session()->token() == $request->_token) {
+            $this->validate($request, array(
+                'quantity' => 'required',
+            ));
+
+            $trades->quantity = $request->quantity;
+            $trades->open_price = $request->open_price;
+            $trades->save();
+
+            Session::flash('updated'); // Flash UI Toast message
+            return redirect()->back(); // Return back to active trades
+        } else {
+            return abort(404);
+        }
     }
 
     public function convert(Trades $trades, Request $request) {
-        // IF user close partial quantity
-        if($request->quantity < $trades->quantity) {
-            // --- sum new quantity
-            $quantity = $trades->quantity - $request->quantity;
-            // --- make NEW Bitcoin trade
-            $trade = new Trades;
-            $trade->exchange_id = $trades->exchange_id;
-            $trade->coin_id = 1;
-            $trade->open_price = $request->bitcoin_price;
-            $trade->quantity = $request->bitcoin_quantity;
-            $trade->referal_trade_id = $trades->id;
-            $trade->save();
-            // --- make NEW converted coin trade with new quantity
-            $trade = new Trades;
-            $trade->exchange_id = $trades->exchange_id;
-            $trade->coin_id = $trades->coin_id;
-            $trade->open_price = $trades->open_price;
-            $trade->quantity = $quantity;
-            $trade->save();
-            // --- update converted coin trade and make it unactive
-            $trades->close_quantity = $request->quantity;
-            $trades->bitcoin_quantity = $request->bitcoin_quantity;
-            $trades->bitcoin_price = $request->bitcoin_price;
-            $trades->is_active = 0;
-            $trades->save();
-        } else {
-            // --- make NEW Bitcoin trade
-            $trade = new Trades;
-            $trade->exchange_id = $trades->exchange_id;
-            $trade->coin_id = 1;
-            $trade->open_price = $request->bitcoin_price;
-            $trade->quantity = $request->bitcoin_quantity;
-            $trade->referal_trade_id = $trades->id;
-            $trade->save();
-            // --- update converted coin trade and make it unactive
-            $trades->close_quantity = $request->quantity;
-            $trades->bitcoin_quantity = $request->bitcoin_quantity;
-            $trades->bitcoin_price = $request->bitcoin_price;
-            $trades->is_active = 0;
-            $trades->save();
+        if($request->session()->token() == $request->_token) {
+            // IF user close partial quantity
+            if($request->quantity < $trades->quantity) {
+                // --- sum new quantity
+                $quantity = $trades->quantity - $request->quantity;
+                // --- make NEW Bitcoin trade
+                $trade = new Trades;
+                $trade->user_id = Auth::id();
+                $trade->exchange_id = $trades->exchange_id;
+                $trade->coin_id = 1;
+                $trade->open_price = $request->bitcoin_price;
+                $trade->quantity = $request->bitcoin_quantity;
+                $trade->referal_trade_id = $trades->id;
+                $trade->save();
+                // --- make NEW converted coin trade with new quantity
+                $trade = new Trades;
+                $trade->user_id = Auth::id();
+                $trade->exchange_id = $trades->exchange_id;
+                $trade->coin_id = $trades->coin_id;
+                $trade->open_price = $trades->open_price;
+                $trade->quantity = $quantity;
+                $trade->save();
+                // --- update converted coin trade and make it unactive
+                $trades->close_quantity = $request->quantity;
+                $trades->bitcoin_quantity = $request->bitcoin_quantity;
+                $trades->bitcoin_price = $request->bitcoin_price;
+                $trades->is_active = 0;
+                $trades->save();
+            } else {
+                // --- make NEW Bitcoin trade
+                $trade = new Trades;
+                $trade->user_id = Auth::id();
+                $trade->exchange_id = $trades->exchange_id;
+                $trade->coin_id = 1;
+                $trade->open_price = $request->bitcoin_price;
+                $trade->quantity = $request->bitcoin_quantity;
+                $trade->referal_trade_id = $trades->id;
+                $trade->save();
+                // --- update converted coin trade and make it unactive
+                $trades->close_quantity = $request->quantity;
+                $trades->bitcoin_quantity = $request->bitcoin_quantity;
+                $trades->bitcoin_price = $request->bitcoin_price;
+                $trades->is_active = 0;
+                $trades->save();
 
+            }
+            Session::flash('updated'); // Flash UI Toast message
+            return redirect()->back(); // Return back to active trades
+        } else {
+            return abort(404);
         }
-        Session::flash('updated'); // Flash UI Toast message
-        return redirect()->back(); // Return back to active trades
     }
 
     public function sell(Trades $trades, Request $request) {
-        // IF user close partial quantity
-        if($request->quantity < $trades->quantity) {
-            // --- sum new quantity
-            $quantity = $trades->quantity - $request->quantity;
-            // --- make NEW trade with old data and new quantity
-            $trade = new Trades;
-            $trade->exchange_id = $trades->exchange_id;
-            $trade->coin_id = $trades->coin_id;
-            $trade->open_price = $trades->open_price;
-            $trade->quantity = $quantity;
-            $trade->save();
-            // update CURRENT trade and make it unactive
-            $trades->close_quantity = $request->quantity;
-            $trades->close_price = $request->close_price;
-            $trades->is_active = 0;
-            $trades->save();
-        // ELSE update CURRENT trade and make it unactive
+        if($request->session()->token() == $request->_token) {
+            // IF user close partial quantity
+            if($request->quantity < $trades->quantity) {
+                // --- sum new quantity
+                $quantity = $trades->quantity - $request->quantity;
+                // --- make NEW trade with old data and new quantity
+                $trade = new Trades;
+                $trade->user_id = Auth::id();
+                $trade->exchange_id = $trades->exchange_id;
+                $trade->coin_id = $trades->coin_id;
+                $trade->open_price = $trades->open_price;
+                $trade->quantity = $quantity;
+                $trade->save();
+                // update CURRENT trade and make it unactive
+                $trades->close_quantity = $request->quantity;
+                $trades->close_price = $request->close_price;
+                $trades->is_active = 0;
+                $trades->save();
+            // ELSE update CURRENT trade and make it unactive
+            } else {
+                $trades->close_quantity = $request->quantity;
+                $trades->close_price = $request->close_price;
+                $trades->is_active = 0;
+                $trades->save();
+            }
+            Session::flash('updated'); // Flash UI Toast message
+            return redirect()->back(); // Return back to active trades
         } else {
-            $trades->close_quantity = $request->quantity;
-            $trades->close_price = $request->close_price;
-            $trades->is_active = 0;
-            $trades->save();
-        }
-        Session::flash('updated'); // Flash UI Toast message
-        return redirect()->back(); // Return back to active trades
+            return abort(404);
+        }    
     }
 
 }

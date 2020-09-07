@@ -10,21 +10,21 @@
     @foreach ($coins as $coin)
       <div class="column is-one-quarter-fullhd is-one-third-desktop has-text-centered">
         <div class="box has-text-centered is-size-4">
-          @if(!empty($coin->trades))
-          <?php $total_quantity = null; ?>
-          @foreach($coin->trades as $trade)
-          <?php $total_quantity += $trade->quantity; ?>
-          @endforeach
-          Available Quantity
-          <br />
-          {{ $total_quantity }}
-          @endif
-          <br />  
           {{ $coin->name }}
           <br />
           <span class="tag is-dark">{{ $coin->symbol }}</span>
           <br />
-          Current Price
+          @if(!empty($coin->trades))
+          <?php $total_quantity = 0; ?>
+          @foreach($coin->trades as $trade)
+          <?php $total_quantity += $trade->quantity; ?>
+          @endforeach
+          <span class="is-size-5">Available Quantity</span>
+          <br />
+          {{ $total_quantity }}
+          @endif
+          <br />
+          <span class="is-size-5">Current Price</span>
           <br />
           ${{ $coin->price }}
         </div>

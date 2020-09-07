@@ -22,7 +22,6 @@ Route::get('/trades/closed', 'TradesController@closedTrades')->name('trades.clos
 Route::get('/trades/coins', 'TradesController@tradesPerCoins')->name('trades.coins');
 Route::get('/trades/exchanges', 'TradesController@tradesPerExchanges')->name('trades.exchanges');
 Route::get('/trades/create', 'TradesController@create')->name('trades.create');
-Route::get('/trades/edit/{trades}', 'TradesController@edit')->name('trades.edit');
 Route::post('/trades/store', 'TradesController@store')->name('trades.store');
 Route::put('/trades/update/{trades}', 'TradesController@update')->name('trades.update');
 Route::put('/trades/sell/{trades}', 'TradesController@sell')->name('trades.sell');
