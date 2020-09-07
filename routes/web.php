@@ -42,17 +42,17 @@ Route::post('/exchanges/store', 'ExchangesController@store')->name('exchanges.st
 Route::prefix('manage')->group(function() {
 
   // COINS
-  Route::get('/coins', 'manageCoinsController@index')->name('manage.coins.index');
-  Route::get('/coins/create', 'manageCoinsController@create')->name('manage.coins.create');
-  Route::get('/coins/edit/{coins}', 'manageCoinsController@edit')->name('manage.coins.edit');
-  Route::post('/coins/store', 'manageCoinsController@store')->name('manage.coins.store');
-  Route::put('/coins/update/{coins}', 'manageCoinsController@update')->name('manage.coins.update');
+  Route::get('/coins', 'ManageCoinsController@index')->name('manage.coins.index');
+  Route::get('/coins/create', 'ManageCoinsController@create')->name('manage.coins.create');
+  Route::get('/coins/edit/{coins}', 'ManageCoinsController@edit')->name('manage.coins.edit');
+  Route::post('/coins/store', 'ManageCoinsController@store')->name('manage.coins.store');
+  Route::put('/coins/update/{coins}', 'ManageCoinsController@update')->name('manage.coins.update');
 
   // EXCHANGES
-  Route::get('/exchanges', 'manageExchangesController@index')->name('manage.exchanges.index');
-  Route::get('/exchanges/create', 'manageExchangesController@create')->name('manage.exchanges.create');
-  Route::get('/exchanges/edit/{exchanges}', 'manageExchangesController@edit')->name('manage.exchanges.edit');
-  Route::post('/exchanges/store', 'manageExchangesController@store')->name('manage.exchanges.store');
-  Route::put('/exchanges/update/{exchanges}', 'manageExchangesController@update')->name('manage.exchanges.update');
+  Route::get('/exchanges', 'ManageExchangesController@index')->name('manage.exchanges.index');
+  Route::get('/exchanges/create', 'ManageExchangesController@create')->name('manage.exchanges.create');
+  Route::get('/exchanges/edit/{exchanges}', 'ManageExchangesController@edit')->name('manage.exchanges.edit');
+  Route::post('/exchanges/store', 'ManageExchangesController@store')->name('manage.exchanges.store');
+  Route::put('/exchanges/update/{exchanges}', 'ManageExchangesController@update')->name('manage.exchanges.update');
 
 });
