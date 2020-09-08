@@ -2,13 +2,13 @@
 @section('content')
 <div class="columns is-multiline is-centered pt-5">
   @foreach($exchanges as $exchange)
-    <div class="column is-6 mx-3">
+    <div class="column is-7 mx-3">
       <div class="box has-text-left is-size-5">
         <p class="title is-size-3">
           {{ $exchange->name }}
         </p>
         @if($exchange->trades->isNotEmpty())
-          <table class="table is-hoverable is-bordered">
+          <table class="table is-hoverable is-bordered is-fullwidth">
             <tr>
               <th>Coin</th>
               <th>Quantity</th>
