@@ -38,8 +38,9 @@ Version 1
 1.24.8 - 01.09.2020:PM - Add "total quantity" on active trades in coins.index <br />
 Version 2
 2.24.8 - 06-07.09.2020 - Split all.coins_exchanges to user.coins_exchanges, make manage pages (coins, exchanges), remove buefy styles (override bulma problem), change navbar to admin / user styles, add coin price in database + update price (cron must be add to server), clear unused routes and functions from controllers, etc... <br />
- Fix 9 - 07.09.2020:PM - Fix manage routes "manage.... to Manage...."
-2.25.9 - 07.09.2020:PM - Add coin symbol to autocomplete in coins.create 
+ Fix 9 - 07.09.2020:PM - Fix manage routes "manage.... to Manage...." <br />
+2.25.9 - 07.09.2020:PM - Add coin symbol to autocomplete in coins.create  <br />
+2.26.9 - 08.09.2020:PM - Add per_coins and per_exchanges views and functions <br />
 
 -
 Version naming = Versions.Updates.Fixes <br /><br />

@@ -1,36 +1,26 @@
 @extends('main')
 @section('content')
-<div class="columns is-multiline">
-  <div class="column is-12 pt-6"></div>
-  <div class="column is-12 is-size-3 has-text-centered pt-6">
-    Sorry <br /> Still Working on this
-  </div>
-  {{-- @foreach($coins as $coin)
-   @foreach ($coin->trades as $trade) 
-    <div class="column is-one-third">
-      <div class="box has-background-dark has-text-centered has-text-light">
-        <span class="is-size-3 has-text-weight-light">
-          {{ $coin->name }}
-        </span>
-        <hr class="has-background-light" />
-        <?php
-          // $total_quantity = null;
-          // $total_paid = null;
-          // $total_quantity += $trade->quantity;
-          // $total_paid += ($trade->quantity*$trade->open_price);
-          ?>
-        Current Price ${{ $data[$coin->api_link]['usd'] }} <br />
-        Total Quantity {{ $total_quantity }} <br />
-        Total Available ${{ number_format($total_quantity*$data[$coin->api_link]['usd'], 2) }} <br />
-        Total Paid ${{ number_format($total_paid, 2)}}
-        <hr class="has-background-light" />
-        Profit / Loss <br />
-        <span class="is-size-4">${{ number_format(($total_quantity*$data[$coin->api_link]['usd']) - $total_paid, 2) }}</span>
-        <hr class="pt-2 @if(number_format(($total_quantity*$data[$coin->api_link]['usd']) - $total_paid, 0) > 0 ) has-background-success @else has-background-danger @endif" />
+<div class="columns is-multiline pt-5">
+  @foreach ($coins as $coin)
+    <div class="column is-one-quarter-fullhd is-one-third-desktop">
+      <div class="box has-text-centered is-size-5">
+        <a class="button is-info is-outlined has-tooltip-arrow has-tooltip-dark" data-tooltip="{{ $coin->name }}">{{ $coin->symbol }}</a>
+        <br /><br />
+        <span class="is-size-5">Current Price: ${{ number_format($coin->price,2) }} </span>
+        <br />
+        @if(!empty($coin->trades))
+        <?php $total_quantity = 0; $total_profit = 0; ?>
+        @foreach($coin->trades as $trade)
+        <?php $total_quantity += $trade->quantity; $total_profit += ($trade->quantity*$trade->coin->price)-($trade->quantity*$trade->open_price); ?>
+        @endforeach
+        <span class="is-size-5">Quantity: {{ $total_quantity }} </span>
+        @endif
+        <br />
+        <span class="is-size-5">Available: ${{ number_format($total_quantity*$coin->price, 2) }} </span>
+        <br />
+        <span class="is-size-5">Profit: ${{ number_format($total_profit, 2) }} </span>
       </div>
     </div>
-    @endforeach
-  @endforeach --}}
-
-</div> 
+  @endforeach
+</div>
 @endsection

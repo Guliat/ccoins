@@ -28,11 +28,16 @@ class TradesController extends Controller {
     }
 
     public function tradesPerCoins() {
-        return view('trades.per_coins');
+        $user = User::find(Auth::id());
+        $coins = $user->coins;
+        return view('trades.per_coins')->withCoins($coins);
     }
 
     public function tradesPerExchanges() {
-        return view('trades.per_exchanges');
+        $user = User::find(Auth::id());
+        $exchanges = $user->exchanges;  
+        $coins = $user->coins;
+        return view('trades.per_exchanges')->withExchanges($exchanges)->withCoins($coins);
     }
 
     public function create() {
