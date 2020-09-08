@@ -41,7 +41,9 @@ Version 2
  Fix 9 - 07.09.2020:PM - Fix manage routes "manage.... to Manage...." <br />
 2.25.9 - 07.09.2020:PM - Add coin symbol to autocomplete in coins.create  <br />
 2.26.9 - 08.09.2020:PM - Add per_coins and per_exchanges views and functions <br />
-dd c2.27.9 - 08.09.2020:PM - Add colors to negative and positive numbers in per_coins and per_exchanges <br />
+2.27.9 - 08.09.2020:PM - Add colors to negative and positive numbers in per_coins and per_exchanges <br />
+2.28.9 - 08.09.2020:PM - Add total profit in per_exchanges view <br />
+
 
 -
 Version naming = Versions.Updates.Fixes <br /><br />
