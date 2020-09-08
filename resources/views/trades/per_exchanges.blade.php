@@ -26,8 +26,9 @@
                 <td>
                   ${{ $trade->open_price }} 
                 </td>
-                <td>
-                  ${{ number_format(($trade->quantity*$trade->coin->price)-($trade->quantity*$trade->open_price), 2) }}
+                <?php $profit = (($trade->quantity*$trade->coin->price)-($trade->quantity*$trade->open_price)); ?>
+                <td class="@if($profit >= 0) has-text-success @else has-text-danger @endif">
+                  <b>${{ number_format($profit, 2) }}</b>
                 </td>
               </tr>  
             @endforeach

@@ -18,7 +18,7 @@
         <br />
         <span class="is-size-5">Available: ${{ number_format($total_quantity*$coin->price, 2) }} </span>
         <br />
-        <span class="is-size-5">Profit: ${{ number_format($total_profit, 2) }} </span>
+        <b class="is-size-5 @if($total_profit >=0) has-text-success @else has-text-danger @endif">Profit: ${{ number_format($total_profit, 2) }} </b>
       </div>
     </div>
   @endforeach
