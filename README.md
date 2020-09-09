@@ -47,7 +47,7 @@ Version 2
 2.29.10 - 09.09.2020:PM - Add IMAGE logo to navbar and welcome, add fav icons <br />
 2.30.10 - 10.09.2020:AM - Change login and register pages design, change registration to page instead of modal <br />
    Fix 11 - Move updatePrices function to HomeController <br />
-   
+   Fix 12 - Change route for Fix 11 <br />
 -
 Version naming = Versions.Updates.Fixes <br /><br />
 Version 1.14.2 - First fully functional version (must work :D - NOT TESTED with pulling, etc.) <br />

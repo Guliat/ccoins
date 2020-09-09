@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/update_prices', 'HomeController@updatePrices')->name('coins.update.prices');
 
 // TRADES
 Route::get('/trades/active', 'TradesController@activeTrades')->name('trades.active');
@@ -31,7 +32,6 @@ Route::put('/trades/convert/{trades}', 'TradesController@convert')->name('trades
 Route::get('/coins', 'CoinsController@index')->name('coins.index');
 Route::get('/coins/create', 'CoinsController@create')->name('coins.create');
 Route::post('/coins/store', 'CoinsController@store')->name('coins.store');
-Route::get('/coins/update_prices', 'CoinsController@updatePrices')->name('coins.update.prices');
 
 // EXCHANGES
 Route::get('/exchanges', 'ExchangesController@index')->name('exchanges.index');
