@@ -13,10 +13,11 @@
       <th>open at</th>
       <th>total paid</th>
       <th>current available</th>
-      <th>current profit</th>
+      <th>current profit/loss</th>
       <th></th>
     </thead>
     @foreach($trades as $trade)
+    <?php $profit = (($trade->quantity*$trade->coin->price)-($trade->quantity*$trade->open_price)); ?>
     <tr>
       <td>
         <b-modal v-model="edit_modal{{ $trade->id }}" has-modal-card trap-focus :destroy-on-hide="false" aria-role="dialog" aria-modal>
@@ -63,7 +64,9 @@
       <td>{{ $trade->open_at }}</td>
       <td>${{ number_format($trade->quantity*$trade->open_price, 6) }}</td>
       <td>${{ number_format($trade->coin->price*$trade->quantity, 6) }}</td>
-      <td>${{ number_format(($trade->quantity*$trade->coin->price)-($trade->quantity*$trade->open_price), 6) }}</td>
+      <td>
+        <b class="@if($profit >= 0) has-text-success @else has-text-danger @endif">${{ number_format($profit, 2) }}</b>
+      </td>
       <td>
         <div class="buttons has-addons">
           <b-modal v-model="sell_modal{{ $trade->id }}" has-modal-card trap-focus :destroy-on-hide="false" aria-role="dialog" aria-modal>
