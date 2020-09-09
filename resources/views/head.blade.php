@@ -4,6 +4,9 @@
 
   <title>CCoins</title>
 
+  <!-- FAVICONS -->
+  <link rel="shortcut icon" href="{{ asset('/') }}ccoins_fav32.png">
+  <link rel="shortcut icon" href="{{ asset('/') }}ccoins_fav196.png">
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300&display=swap" rel="stylesheet">
   <!-- Styles -->
@@ -25,7 +28,7 @@
       }
 
       .full-height {
-          height: 85vh;
+          height: 90vh;
       }
 
       .flex-center {
@@ -46,10 +49,6 @@
       }
       .links > a:hover {
           color: #929ff0;
-      }
-      .is-size-0 {
-          font-size: 6em;
-          font-family: Nunito;
       }
   </style>
 </head>

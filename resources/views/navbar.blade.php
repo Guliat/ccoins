@@ -1,7 +1,7 @@
 <nav class="navbar is-fixed-top @if(Auth::id() == 1) is-danger @else is-dark @endif nunito" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="{{ url('/') }}">
-      <span class="is-size-4 pl-5">Ccoins App</span>
+      <img src="{{ asset('') }}ccoins_logo-white.png" width="112" height="28" />
     </a>
     <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbar-active">
       <span aria-hidden="true"></span>
@@ -57,15 +57,15 @@
     <div class="navbar-item">
       <div class="buttons">
         @if(Auth::id() == 1)
-        <a class="button is-white is-outlined" href="{{ route('manage.coins.index') }}">Coins</a>
-        <a class="button is-white is-outlined" href="{{ route('manage.exchanges.index') }}" >Exchanges</a>
+        <a class="button is-light is-inverted" href="{{ route('manage.coins.index') }}">Coins</a>
+        <a class="button is-light is-inverted" href="{{ route('manage.exchanges.index') }}" >Exchanges</a>
         @else
-        <a class="button is-white is-outlined" href="{{ route('coins.index') }}">Coins</a>
-        <a class="button is-white is-outlined" href="{{ route('exchanges.index') }}" >Exchanges</a>
+        <a class="button is-light is-inverted" href="{{ route('coins.index') }}">Coins</a>
+        <a class="button is-light is-inverted" href="{{ route('exchanges.index') }}" >Exchanges</a>
         @endif
         <form id="logout-form" action="{{ route('logout') }}" method="POST" >
           @csrf
-          <button type="submit" class="button is-white is-outlined">
+          <button type="submit" class="button is-light is-inverted">
             <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
           </button>
         </form>
@@ -77,8 +77,8 @@
         <div id="register_login_modal">
           @include('login_modal')
           @include('register_modal')
-          <a class="button is-white is-outlined" @click="register_modal = true" >Sign Up</a>
-          <a class="button is-white is-outlined px-5" @click="login_modal = true" >
+          <a class="button is-light is-inverted" @click="register_modal = true" >Sign Up</a>
+          <a class="button is-light is-inverted px-5" @click="login_modal = true" >
             <span class="icon"><i class="far fa-user"></i></span>
           </a>
         </div>

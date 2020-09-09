@@ -1,6 +1,6 @@
 <div id="login_modal">
   <b-modal v-model="login_modal" has-modal-card trap-focus :destroy-on-hide="false" aria-role="dialog" aria-modal>
-  <div class="modal-card" style="width: 350px">
+  <div class="modal-card" style="width: auto;min-width: 350px;">
     <form action="{{ route('login') }}" method="post">
     @csrf 
       <header class="modal-card-head has-text-dark is-size-4">Login</header>

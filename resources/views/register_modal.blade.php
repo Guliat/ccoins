@@ -1,6 +1,6 @@
 <div id="register_modal" class="has-text-dark">
   <b-modal v-model="register_modal" has-modal-card trap-focus :destroy-on-hide="false" aria-role="dialog" aria-modal>
-    <div class="modal-card" style="width: 350px">
+    <div class="modal-card" style="width: auto;min-width: 350px;">
       <form method="POST" action="{{ route('register') }}">
       @csrf
         <header class="modal-card-head is-size-4">New Registration</header>
