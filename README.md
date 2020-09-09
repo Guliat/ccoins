@@ -45,6 +45,7 @@ Version 2
 2.28.9 - 08.09.2020:PM - Add total profit in per_exchanges view <br />
    Fix 10 - Fix navbar burger buttons, fix register and login modals (width) <br />
 2.29.10 - 09.09.2020:PM - Add IMAGE logo to navbar and welcome, add fav icons <br />
+2.30.10 - 10.09.2020:AM - Change login and register pages design, change registration to page instead of modal <br />
 
 -
 Version naming = Versions.Updates.Fixes <br /><br />
