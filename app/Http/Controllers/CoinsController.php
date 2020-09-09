@@ -6,8 +6,6 @@ use Session;
 use App\User;
 use App\Coins;
 use Illuminate\Http\Request;
-use Codenixsv\CoinGeckoApi\CoinGeckoClient;
-
 
 class CoinsController extends Controller {
     

@@ -48,6 +48,8 @@ Version 2
 2.30.10 - 10.09.2020:AM - Change login and register pages design, change registration to page instead of modal <br />
    Fix 11 - Move updatePrices function to HomeController <br />
    Fix 12 - Change route for Fix 11 <br />
+   Fix 13 - Fix fix 11 and 12 (too tired) <br />
+   
 -
 Version naming = Versions.Updates.Fixes <br /><br />
 Version 1.14.2 - First fully functional version (must work :D - NOT TESTED with pulling, etc.) <br />

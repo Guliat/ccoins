@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/update_prices', 'HomeController@updatePrices')->name('coins.update.prices');
+Route::get('/update_prices', 'HomeController@updatePrices')->name('update.prices');
 
 // TRADES
 Route::get('/trades/active', 'TradesController@activeTrades')->name('trades.active');

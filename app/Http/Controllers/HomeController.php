@@ -1,8 +1,9 @@
 <?php
-
 namespace App\Http\Controllers;
 
+use App\Coins;
 use Illuminate\Http\Request;
+use Codenixsv\CoinGeckoApi\CoinGeckoClient;
 
 class HomeController extends Controller {
 
