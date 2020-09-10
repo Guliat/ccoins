@@ -10,11 +10,10 @@
             </div>
 
             <div class="notification is-warning">
-                I still working on the application. <br />
-                Its recommended to NOT use real data in trades yet! <br />
-                You are free to sign up and enjoy. When its ready everything except accounts will be cleaned. <br />
-                Everybody will be noticed with email.
-                Thanks!
+                I am still working on this application. <br />
+				It is NOT recommended to use real data in trades yet! <br />
+				Feel free to sign up and enjoy. Once ready, all data except accounts will be cleaned. <br />
+				All users will be notified via email. Thank you. <br />
             </div>
 
         </div>
