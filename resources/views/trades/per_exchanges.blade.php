@@ -11,22 +11,25 @@
           <table class="table is-hoverable is-bordered is-fullwidth">
             <tr>
               <th>Coin</th>
-              <th>Quantity</th>
               <th>Open Price</th>
-              <th>Current Profit</th>
+              <th>Current P/L</th>
             </tr>
-            <?php $total_profit = null; ?>
+            <?php $total_profit = null; $total_available = null; ?>
             @foreach($exchange->trades as $trade)
-              <?php 
+              <?php
+                $total_available += $trade->quantity*$trade->coin->price;
                 $total_profit += (($trade->quantity*$trade->coin->price)-($trade->quantity*$trade->open_price));
                 $profit = (($trade->quantity*$trade->coin->price)-($trade->quantity*$trade->open_price))
               ?>
               <tr>
                 <td>
-                  {{ $trade->coin->name }}
-                </td>
-                <td>
-                  {{ $trade->quantity }}
+                  {{ $trade->quantity }} {{ $trade->coin->symbol }}
+                  @if($trade->referal_trade_id)
+                   <br />
+                    <div class="is-size-7">
+                    Converted from {{ $trade->trade->coin->symbol }}
+                    </div>
+                  @endif
                 </td>
                 <td>
                   ${{ $trade->open_price }} 
@@ -38,8 +41,11 @@
             @endforeach
           </table>
           <div class="has-text-right">
+            <span class="tag is-large is-light">
+              Available: ${{ number_format($total_available, 2) }}
+            </span>
             <span class="tag is-large @if($total_profit >= 0) is-success @else is-danger @endif">
-              Total: ${{ number_format($total_profit, 2) }}
+              Total P/L: ${{ number_format($total_profit, 2) }}
             </span>
           </div>
         @else
