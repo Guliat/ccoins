@@ -42,9 +42,12 @@
             @endforeach
           </table>
           <div class="has-text-right">
-            <span class="tag is-large is-light">
-              Total BTC: {{ App\Trades::totalBtc($exchange->id) }}
-            </span>
+            <?php $total_btc = App\Trades::totalBtc($exchange->id); ?>
+            @if($total_btc)
+              <span class="tag is-large is-light">
+                Total BTC: {{ $total_btc }}
+              </span>
+            @endif
             <span class="tag is-large is-light">
               Available: ${{ number_format($total_available, 2) }}
             </span>
