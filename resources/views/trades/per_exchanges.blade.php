@@ -14,12 +14,13 @@
               <th>Open Price</th>
               <th>Current P/L</th>
             </tr>
-            <?php $total_profit = null; $total_available = null; ?>
+            <?php $total_profit = null; $total_available = null;  ?>
             @foreach($exchange->trades as $trade)
               <?php
                 $total_available += $trade->quantity*$trade->coin->price;
                 $total_profit += (($trade->quantity*$trade->coin->price)-($trade->quantity*$trade->open_price));
-                $profit = (($trade->quantity*$trade->coin->price)-($trade->quantity*$trade->open_price))
+                $profit = (($trade->quantity*$trade->coin->price)-($trade->quantity*$trade->open_price));
+                //$total_btc = $trade->quantity->where('coin_id', 1);
               ?>
               <tr>
                 <td>
@@ -41,6 +42,9 @@
             @endforeach
           </table>
           <div class="has-text-right">
+            <span class="tag is-large is-light">
+              Total BTC: {{ App\Trades::totalBtc($exchange->id) }}
+            </span>
             <span class="tag is-large is-light">
               Available: ${{ number_format($total_available, 2) }}
             </span>
