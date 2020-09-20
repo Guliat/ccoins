@@ -49,6 +49,9 @@ Version 2
    Fix 11 - Move updatePrices function to HomeController <br />
    Fix 12 - Change route for Fix 11 <br />
    Fix 13 - Fix fix 11 and 12 (too tired) <br />
+2.31.13 - (Branch Profit-Loss-Column) - add profit_loss column Migration, change trades.closed View, change TradesController <br />
+
+
    
 -
 Version naming = Versions.Updates.Fixes <br /><br />

@@ -94,6 +94,8 @@ class TradesController extends Controller {
 
     public function convert(Trades $trades, Request $request) {
         if($request->session()->token() == $request->_token) {
+            // --- sum Profit/Loss
+            $profit_loss = ($request->bitcoin_quantity*$request->bitcoin_price)-($trades->quantity*$trades->open_price);
             // IF user close partial quantity
             if($request->quantity < $trades->quantity) {
                 // --- sum new quantity
@@ -119,6 +121,7 @@ class TradesController extends Controller {
                 $trades->close_quantity = $request->quantity;
                 $trades->bitcoin_quantity = $request->bitcoin_quantity;
                 $trades->bitcoin_price = $request->bitcoin_price;
+                $trades->profit_loss = $profit_loss;
                 $trades->is_active = 0;
                 $trades->save();
             } else {
@@ -135,6 +138,7 @@ class TradesController extends Controller {
                 $trades->close_quantity = $request->quantity;
                 $trades->bitcoin_quantity = $request->bitcoin_quantity;
                 $trades->bitcoin_price = $request->bitcoin_price;
+                $trades->profit_loss = $profit_loss;
                 $trades->is_active = 0;
                 $trades->save();
 
@@ -148,6 +152,8 @@ class TradesController extends Controller {
 
     public function sell(Trades $trades, Request $request) {
         if($request->session()->token() == $request->_token) {
+            // --- sum Profit/Loss
+            $profit_loss = ($request->quantity*$request->close_price)-($request->quantity*$trades->open_price);
             // IF user close partial quantity
             if($request->quantity < $trades->quantity) {
                 // --- sum new quantity
@@ -163,12 +169,14 @@ class TradesController extends Controller {
                 // update CURRENT trade and make it unactive
                 $trades->close_quantity = $request->quantity;
                 $trades->close_price = $request->close_price;
+                $trades->profit_loss = $profit_loss;
                 $trades->is_active = 0;
                 $trades->save();
             // ELSE update CURRENT trade and make it unactive
             } else {
                 $trades->close_quantity = $request->quantity;
                 $trades->close_price = $request->close_price;
+                $trades->profit_loss = $profit_loss;
                 $trades->is_active = 0;
                 $trades->save();
             }
