@@ -75,10 +75,10 @@
     <div class="navbar-item">
       <div class="buttons">
         <div id="register_login_modal">
-          @include('login_modal')
+          {{-- @include('login_modal') --}}
           {{-- @include('register_modal') --}}
           <a href="{{ route('register') }}" class="button is-light is-inverted">Sign Up</a>
-          <a class="button is-light is-inverted px-5" @click="login_modal = true" >
+          <a href="{{ route('login') }}" class="button is-light is-inverted px-5" >
             <span class="icon"><i class="far fa-user"></i></span>
           </a>
         </div>
