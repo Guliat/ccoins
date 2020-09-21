@@ -6,12 +6,15 @@
     </a>
   </div>
 @if($exchanges->isNotEmpty())
-  <div class="columns is-multiline is-centered">
+  <div class="columns is-multiline is-centered is-marginless">
     <div class="column is-5 has-text-centered">
       @foreach ($exchanges as $exchange)
       <div class="box">
-        <div class="pt-1 is-size-3">
+        <div class="pt-1 is-size-2">
           {{ $exchange->name }}
+        </div>
+        <div class="pt-1 is-size-6">
+          {{ $exchange->pivot->note }}
         </div>
       </div>
       @endforeach

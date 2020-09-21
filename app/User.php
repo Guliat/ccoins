@@ -11,11 +11,11 @@ class User extends Authenticatable
     use Notifiable;
 
     public function coins() {
-        return $this->belongsToMany('App\Coins', 'users_coins', 'user_id', 'coin_id')->withTimestamps(); 
+        return $this->belongsToMany('App\Coins', 'users_coins', 'user_id', 'coin_id')->withPivot('note')->withTimestamps();
     }
 
     public function exchanges() {
-        return $this->belongsToMany('App\Exchanges', 'users_exchanges', 'user_id', 'exchange_id')->withTimestamps(); 
+        return $this->belongsToMany('App\Exchanges', 'users_exchanges', 'user_id', 'exchange_id')->withPivot('note')->withTimestamps();
     }
 
     /**

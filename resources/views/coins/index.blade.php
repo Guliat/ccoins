@@ -6,27 +6,19 @@
     </a>
   </div>
 @if($coins->isNotEmpty())
-  <div class="columns is-multiline">
+  <div class="columns is-marginless is-multiline">
     @foreach ($coins as $coin)
       <div class="column is-one-quarter-fullhd is-one-third-desktop has-text-centered">
-        <div class="box has-text-centered is-size-4">
-          {{ $coin->name }}
-          <br />
-          <span class="tag is-dark">{{ $coin->symbol }}</span>
-          <br />
-          @if(!empty($coin->trades))
-          <?php $total_quantity = 0; ?>
-          @foreach($coin->trades as $trade)
-          <?php $total_quantity += $trade->quantity; ?>
-          @endforeach
-          <span class="is-size-5">Available Quantity</span>
-          <br />
-          {{ $total_quantity }}
-          @endif
-          <br />
-          <span class="is-size-5">Current Price</span>
-          <br />
-          ${{ $coin->price }}
+        <div class="box has-text-centered">
+          <div class="pt-1 is-size-3">
+            {{ $coin->name }}
+          </div>
+          <div class="pt-1">
+            <span class="tag is-dark is-medium">{{ $coin->symbol }}</span>
+          </div>
+          <div class="pt-1 is-size-6">
+            {{ $coin->pivot->note }}
+          </div>
         </div>
       </div>
     @endforeach
