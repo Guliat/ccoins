@@ -28,6 +28,9 @@ Route::put('/trades/update/{trades}', 'TradesController@update')->name('trades.u
 Route::put('/trades/sell/{trades}', 'TradesController@sell')->name('trades.sell');
 Route::put('/trades/convert/{trades}', 'TradesController@convert')->name('trades.convert');
 
+// SUMMARY
+  Route::get('/summary', 'SummaryController@index')->name('summary.index');
+
 // COINS
 Route::get('/coins', 'CoinsController@index')->name('coins.index');
 Route::get('/coins/create', 'CoinsController@create')->name('coins.create');
