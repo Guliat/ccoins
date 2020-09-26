@@ -17,9 +17,17 @@ class TradesController extends Controller {
     }
     
     public function activeTrades() {
-        $trades = Trades::where('user_id', Auth::id())->where('is_active', 1)->get();
+        $active_trades = Trades::where('user_id', Auth::id())->where('is_active', 1)->get();
         $bitcoin = Coins::where('name', 'bitcoin')->select('price')->first();
-        return view('trades.active')->withTrades($trades)->withBitcoin($bitcoin);
+
+        $json=null;
+        foreach($active_trades as $trade) {
+            $profit = number_format((($trade->quantity*$trade->coin->price)-($trade->quantity*$trade->open_price)),2 );
+            $available = number_format($trade->quantity*$trade->coin->price, 3);
+            $json .= '{"id": '.$trade->id.', "exchange":"'.$trade->exchange->name.'", "coin":"'.$trade->coin->symbol.'", "quantity": '.$trade->quantity.', "available": '.$available.', "profit": '.$profit.',  }, ';
+        }
+
+        return view('trades.active')->withTrades($json)->withBitcoin($bitcoin)->withActiveTrades($active_trades);
     }
 
     public function closedTrades() {
