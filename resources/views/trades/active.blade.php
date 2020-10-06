@@ -23,11 +23,11 @@
             detailed
             detail-key="id"
             >  
-            <b-table-column field="exchange_name" label="Exchange" sortable v-slot="props">
+            <b-table-column field="exchange" label="Exchange" sortable v-slot="props">
               @{{ props.row.exchange }}
             </b-table-column>
 
-            <b-table-column field="coin_symbol" label="Coin" sortable v-slot="props">
+            <b-table-column field="coin" label="Coin" sortable v-slot="props">
               @{{ props.row.coin }}
             </b-table-column>
 
