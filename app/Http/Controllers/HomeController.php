@@ -11,7 +11,7 @@ class HomeController extends Controller {
         return view('welcome');
     }
 
-    public function updatePrices() {
+    static public function updatePrices() {
         $coins = Coins::all();
         $client = new CoinGeckoClient();
         foreach($coins as $coin) {
