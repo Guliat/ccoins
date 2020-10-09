@@ -64,10 +64,21 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $t = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        
+        //TODO - move to another controller
+        $m = new \App\Http\Controllers\HomeController;
+        $m->newUserCreated();
+
+        // Mail::raw('New registration in our system detected!', function ($message) {
+        //     $message->from('guliat88@gmail.com', 'CCoins');
+        //     $message->to('guliat88@mail.bg')->subject('New User Created');
+        // });
+
+        return $t;
     }
 }
