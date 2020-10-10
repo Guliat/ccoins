@@ -35,17 +35,5 @@
           </span>
       </div>
     </div>
-
-
-    {{ $totalCoins }}
-    <hr />
-    {{ $totalExchanges }}
-    <hr />
-    {{ $totalTrades }}
-    <hr />
-    {{ $activeTrades }}
-    <hr />
-    {{ $closedTrades }}
-    <hr />
   </div>
 @endsection
