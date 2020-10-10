@@ -22,12 +22,12 @@ class TradesController extends Controller {
 
         $json=null;
         foreach($active_trades as $trade) {
-            $profit = number_format((($trade->quantity*$trade->coin->price)-($trade->quantity*$trade->open_price)),2 );
-            $available = number_format($trade->quantity*$trade->coin->price, 3);
-            $json .= '{"id": '.$trade->id.', "exchange":"'.$trade->exchange->name.'", "coin":"'.$trade->coin->symbol.'", "quantity": '.$trade->quantity.', "available": '.$available.', "profit": '.$profit.',  }, ';
+            $profit = number_format((($trade->quantity*$trade->coin->price)-($trade->quantity*$trade->open_price)), 2, '.', '');
+            $available = number_format($trade->quantity*$trade->coin->price, 3, '.', '');
+            $json .= '{"id": '.$trade->id.', "exchange": "'.$trade->exchange->name.'", "coin": "'.$trade->coin->symbol.'", "quantity": '.$trade->quantity.', "available": '.$available.', "profit": '.$profit.'  }, ';
         }
 
-        return view('trades.active')->withTrades($json)->withBitcoin($bitcoin)->withActiveTrades($active_trades);
+        return view('trades.active')->withTrades($json);
     }
 
     public function closedTrades() {
