@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use Mail;
 use App\Coins;
 use Illuminate\Http\Request;
 use Codenixsv\CoinGeckoApi\CoinGeckoClient;
@@ -11,7 +12,7 @@ class HomeController extends Controller {
         return view('welcome');
     }
 
-    public function updatePrices() {
+    static public function updatePrices() {
         $coins = Coins::all();
         $client = new CoinGeckoClient();
         foreach($coins as $coin) {
@@ -21,4 +22,13 @@ class HomeController extends Controller {
             $update->save();
         }
     }
+
+    public function newUserCreated() {
+        //TODO move to another controller and change in RegisterController
+        Mail::raw('New registration in our system detected!', function ($message) {
+            $message->from('guliat88@gmail.com', 'CCoins');
+            $message->to('guliat88@mail.bg')->subject('New User Created');
+        });
+    }
+    
 }

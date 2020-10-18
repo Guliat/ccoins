@@ -53,6 +53,10 @@
           Trades per Coins
         </a>
         <b class="navbar-item"> | </b>
+        <a href="{{ route('summary.index') }}" class="navbar-item">
+          Summary
+        </a>
+        <b class="navbar-item"> | </b>
       @endif
     <div class="navbar-item">
       <div class="buttons">
