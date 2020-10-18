@@ -35,11 +35,13 @@ Route::get('/update_prices', 'HomeController@updatePrices')->name('update.prices
   Route::get('/coins', 'CoinsController@index')->name('coins.index');
   Route::get('/coins/create', 'CoinsController@create')->name('coins.create');
   Route::post('/coins/store', 'CoinsController@store')->name('coins.store');
+  Route::put('/coins/note', 'CoinsController@updateNote')->name('coin.note.update');
 
 // EXCHANGES
   Route::get('/exchanges', 'ExchangesController@index')->name('exchanges.index');
   Route::get('/exchanges/create', 'ExchangesController@create')->name('exchanges.create');
   Route::post('/exchanges/store', 'ExchangesController@store')->name('exchanges.store');
+  Route::put('/exchanges/note', 'ExchangesController@updateNote')->name('exchange.note.update');
 
 // MANAGE
   Route::prefix('manage')->group(function() {
