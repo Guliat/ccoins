@@ -32,5 +32,12 @@ class CoinsController extends Controller {
         Session::flash('added');
         return redirect()->route('coins.index');
     }
+
+    public function updateNote(Request $request) {
+        $user = User::find(Auth::id());
+        $user->coins()->updateExistingPivot($request->coin_id, array('note' => $request->note));
+        Session::flash('updated');
+        return redirect()->back();
+    }
   
 }

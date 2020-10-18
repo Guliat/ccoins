@@ -32,4 +32,10 @@ class ExchangesController extends Controller {
         return redirect()->route('exchanges.index');
     }
 
+    public function updateNote(Request $request) {
+        $user = User::find(Auth::id());
+        $user->exchanges()->updateExistingPivot($request->exchange_id, array('note' => $request->note));
+        Session::flash('updated');
+        return redirect()->back();
+    }
 }
