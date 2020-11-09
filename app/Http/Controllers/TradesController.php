@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
-use Session;
+// use Auth;
 use App\User;
 use App\Coins;
 use App\Trades;
 use App\Exchanges;
-use App\Services\TradeService;
 use Illuminate\Http\Request;
+use App\Services\TradeService;
+use Illuminate\Support\Facades\Session;
 
 class TradesController extends Controller {
     
@@ -21,18 +21,19 @@ class TradesController extends Controller {
     {
 			$calc= new TradeService;
 			$result = collect();
-			$trades = Trades::where('user_id', Auth::id())->where('is_active', 1)->get();
+			$trades = Trades::where('user_id', auth()->id())->where('is_active', 1)->get();
       foreach($trades as $trade) {
         $trade['available'] = $calc->calculateAvailable($trade->quantity, $trade->coin->price);
         $trade['paid'] = $calc->calculatePaid($trade->quantity, $trade->open_price);
         $trade['profit'] = $calc->calculateProfit($trade->quantity, $trade->coin->price, $trade->open_price);
         $result->push($trade);
       }
-			return $result;
-    }
+            return $result;
+		}
+		
     
     public function activeTrades() {
-        $active_trades = Trades::where('user_id', Auth::id())->where('is_active', 1)->get();
+        $active_trades = Trades::where('user_id', auth()->id())->where('is_active', 1)->get();
         $bitcoin = Coins::where('name', 'bitcoin')->select('price')->first();
 
         $json=null;
@@ -46,18 +47,18 @@ class TradesController extends Controller {
     }
 
     public function closedTrades() {
-        $trades = Trades::where('user_id', Auth::id())->where('is_active', 0)->orderBy('coin_id')->get();
+        $trades = Trades::where('user_id', auth()->id())->where('is_active', 0)->orderBy('coin_id')->get();
         return view('trades.closed')->withTrades($trades);
     }
 
     public function tradesPerCoins() {
-        $user = User::find(Auth::id());
+        $user = User::find(auth()->id());
         $coins = $user->coins;
         return view('trades.per_coins')->withCoins($coins);
     }
 
     public function tradesPerExchanges() {
-        $user = User::find(Auth::id());
+        $user = User::find(auth()->id());
         $exchanges = $user->exchanges;  
         $coins = $user->coins;
         return view('trades.per_exchanges')->withExchanges($exchanges)->withCoins($coins);
@@ -65,7 +66,7 @@ class TradesController extends Controller {
 
     public function create() {
 
-        $user = User::find(Auth::id());
+        $user = User::find(auth()->id());
         $coins = $user->coins;
         $exchanges = $user->exchanges;
 
@@ -87,7 +88,7 @@ class TradesController extends Controller {
         $coin = Coins::where('name', $coin_name[0])->first('id');       
 
         $trade = new Trades;
-        $trade->user_id = Auth::id();
+        $trade->user_id = auth()->id();
         $trade->exchange_id = $exchange->id;
         $trade->coin_id = $coin->id;
         $trade->quantity = $request->quantity;
@@ -125,7 +126,7 @@ class TradesController extends Controller {
                 $quantity = $trades->quantity - $request->quantity;
                 // --- make NEW Bitcoin trade
                 $trade = new Trades;
-                $trade->user_id = Auth::id();
+                $trade->user_id = auth()->id();
                 $trade->exchange_id = $trades->exchange_id;
                 $trade->coin_id = 1;
                 $trade->open_price = $request->bitcoin_price;
@@ -134,7 +135,7 @@ class TradesController extends Controller {
                 $trade->save();
                 // --- make NEW converted coin trade with new quantity
                 $trade = new Trades;
-                $trade->user_id = Auth::id();
+                $trade->user_id = auth()->id();
                 $trade->exchange_id = $trades->exchange_id;
                 $trade->coin_id = $trades->coin_id;
                 $trade->open_price = $trades->open_price;
@@ -150,7 +151,7 @@ class TradesController extends Controller {
             } else {
                 // --- make NEW Bitcoin trade
                 $trade = new Trades;
-                $trade->user_id = Auth::id();
+                $trade->user_id = auth()->id();
                 $trade->exchange_id = $trades->exchange_id;
                 $trade->coin_id = 1;
                 $trade->open_price = $request->bitcoin_price;
@@ -183,7 +184,7 @@ class TradesController extends Controller {
                 $quantity = $trades->quantity - $request->quantity;
                 // --- make NEW trade with old data and new quantity
                 $trade = new Trades;
-                $trade->user_id = Auth::id();
+                $trade->user_id = auth()->id();
                 $trade->exchange_id = $trades->exchange_id;
                 $trade->coin_id = $trades->coin_id;
                 $trade->open_price = $trades->open_price;

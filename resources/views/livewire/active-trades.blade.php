@@ -1,16 +1,17 @@
 <div class="container pt-6 box">
-	<select wire:model="filter_coin" class="input">
+
+	{{-- <select wire:model="filter_coin" class="input">
 		<option value="">Filter by Coin</option>
-		@foreach($user_coins as $coin)
+		@foreach($filter_coins as $coin)
 			<option value="{{ $coin->id }}">{{ $coin->symbol }} ({{ $coin->name }})</option>
 		@endforeach
-	</select>
-	<select wire:model="filter_exchange" class="input">
-		<option value="">Filter by Exchange</option>
+	</select> --}}
+
 		@foreach($user_exchanges as $exchange)
-			<option value="{{ $exchange->id }}">{{ $exchange->name }}</option>
+			<input type="checkbox" id="for="{{ $exchange->name }}"" value="{{ $exchange->id }}" wire:model="filter_exchanges">
+			<label for="{{ $exchange->name }}">{{ $exchange->name }}</label>
 		@endforeach
-	</select>
+		
 	<table class="table is-bordered is-hoverable is-fullwidth">
 		<thead>
 			<tr>
