@@ -7,6 +7,7 @@
       @include('navbar')
       @yield('content')
     </div>
+    @livewireScripts
     <script src="{{ asset('js/app.js') }}"></script>
     @yield('scripts')
     @include('scripts')

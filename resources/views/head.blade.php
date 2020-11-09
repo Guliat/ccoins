@@ -51,4 +51,5 @@
           color: #929ff0;
       }
   </style>
+  @livewireStyles
 </head>
