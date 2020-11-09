@@ -8,12 +8,27 @@ use App\User;
 use App\Coins;
 use App\Trades;
 use App\Exchanges;
+use App\Services\TradeService;
 use Illuminate\Http\Request;
 
 class TradesController extends Controller {
     
     public function __construct() {
         $this->middleware('auth');
+    }
+
+    public function livewireTrades()
+    {
+			$calc= new TradeService;
+			$result = collect();
+			$trades = Trades::where('user_id', Auth::id())->where('is_active', 1)->get();
+      foreach($trades as $trade) {
+        $trade['available'] = $calc->calculateAvailable($trade->quantity, $trade->coin->price);
+        $trade['paid'] = $calc->calculatePaid($trade->quantity, $trade->open_price);
+        $trade['profit'] = $calc->calculateProfit($trade->quantity, $trade->coin->price, $trade->open_price);
+        $result->push($trade);
+      }
+			return $result;
     }
     
     public function activeTrades() {
