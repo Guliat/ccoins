@@ -29,6 +29,24 @@
 		{{-- END SIDEBAR --}}
 		{{-- START CONTENT --}}
 		<div class="column is-10">
+			
+			{{-- <div class="select is-dark mb-3">
+				<select wire:model="sort">
+					<option>Sort By</option>
+					<option value="exchange_id">Exchanges</option>
+					<option value="coin_id">Coins</option>
+					<option value="profit">Profit</option>
+				</select>
+			</div> --}}
+			{{-- @if($sort)
+				<button class="button is-dark" wire:click="change_direction">
+					@if($direction == 'asc')
+						<i class="fa fa-arrow-up"></i>
+					@else
+						<i class="fa fa-arrow-down"></i>
+					@endif
+				</button>
+			@endif --}}
 					@if(!$data->isEmpty())
 					<table class="table is-bordered is-hoverable is-fullwidth">
 						<thead>

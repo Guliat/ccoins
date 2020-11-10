@@ -1,4 +1,4 @@
 @extends('main')
 @section('content')
-  @livewire('active-trades')
+  @livewire('trades.active-trades')
 @endsection
