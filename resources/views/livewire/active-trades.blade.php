@@ -6,12 +6,17 @@
 			<option value="{{ $coin->id }}">{{ $coin->symbol }} ({{ $coin->name }})</option>
 		@endforeach
 	</select> --}}
-
+	<form>
 		@foreach($user_exchanges as $exchange)
-			<input type="checkbox" id="for="{{ $exchange->name }}"" value="{{ $exchange->id }}" wire:model="filter_exchanges">
+			<input type="checkbox" id="{{ $exchange->name }}" value="{{ $exchange->id }}" wire:model="filter_exchanges">
 			<label for="{{ $exchange->name }}">{{ $exchange->name }}</label>
 		@endforeach
-		
+		<br />
+		@foreach($user_coins as $coin)
+			<input type="checkbox" id="{{ $coin->name }}" value="{{ $coin->id }}" wire:model="filter_coins">
+			<label for="{{ $coin->name }}">{{ $coin->name }}</label>
+		@endforeach
+		</form>
 	<table class="table is-bordered is-hoverable is-fullwidth">
 		<thead>
 			<tr>

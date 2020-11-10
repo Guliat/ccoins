@@ -6,17 +6,12 @@ namespace App\Http\Livewire;
 use App\User;
 // use App\Trades;
 use Livewire\Component;
-use Livewire\WithPagination;
+// use Livewire\WithPagination;
 use App\Http\Controllers\TradesController;
 
 class ActiveTrades extends Component
 {
-  use WithPagination;
-
-    // public $perPage = 10;
-    // public $search = '';
-    // public $orderBy = 'id';
-    // public $orderAsc = true;
+  // use WithPagination;
 
   public $user_exchanges = '';
   public $user_coins = '';
@@ -29,10 +24,6 @@ class ActiveTrades extends Component
     $this->user_coins = $user->coins;
     $this->user_exchanges = $user->exchanges;
 
-    foreach($user->coins as $coin) {
-      $this->filter_coins = $coin->name;
-    }
-
   }
     
 
@@ -44,7 +35,11 @@ class ActiveTrades extends Component
     // if(empty($this->filter_exchange && $this->filter_coin))
     // {
     // $data = $trades->livewireTrades()->whereIn('coin_id', [$this->filter_coins])->whereIn('exchange_id', [$this->filter_exchanges]);
-    $data = $trades->livewireTrades()->whereIn('coin_id', $this->filter_coins)->whereIn('exchange_id', $this->filter_exchanges);
+    if (!empty($this->filter_exchanges || $this->filter_coins)) {
+      $data = $trades->livewireTrades()->whereIn('coin_id', $this->filter_coins)->whereIn('exchange_id', $this->filter_exchanges);
+    } else {
+      $data = $trades->livewireTrades()->where('profit', '>', 0);
+    }
     // }
 
     // if(!empty($this->filter_exchange || $this->filter_coin))
