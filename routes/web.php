@@ -18,7 +18,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/update_prices', 'HomeController@updatePrices')->name('update.prices');
 
 // TRADES
-  Route::get('/trades/active', 'TradesController@activeTrades')->name('trades.active');
+  Route::view('/trades/active', 'trades.active')->name('trades.active');
   Route::get('/trades/closed', 'TradesController@closedTrades')->name('trades.closed');
   Route::get('/trades/coins', 'TradesController@tradesPerCoins')->name('trades.coins');
   Route::get('/trades/exchanges', 'TradesController@tradesPerExchanges')->name('trades.exchanges');
