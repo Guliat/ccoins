@@ -8,7 +8,7 @@
       @yield('content')
     </div>
     @livewireScripts
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}?v=11112020"></script>
     @yield('scripts')
     @include('scripts')
   </body>
