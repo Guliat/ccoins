@@ -71,8 +71,8 @@ class RegisterController extends Controller
         ]);
         
         //TODO - move to another controller
-        $m = new \App\Http\Controllers\HomeController;
-        $m->newUserCreated();
+        // $m = new \App\Http\Controllers\HomeController;
+        // $m->newUserCreated();
 
         // Mail::raw('New registration in our system detected!', function ($message) {
         //     $message->from('guliat88@gmail.com', 'CCoins');

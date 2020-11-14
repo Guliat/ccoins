@@ -1,5 +1,5 @@
 <div class="container is-fluid pt-6">
-	<div class="columns">
+	<div class="columns is-multiline">
 		{{-- START SIDEBAR --}}
 		<div class="column is-2">
 			<div class="has-text-centered is-size-5">
@@ -7,19 +7,26 @@
 				<hr>
 			</div>
 			<div class="field">
-				<input class="is-checkradio is-danger is-medium" id="all" type="radio" value="0" name="all" wire:model="filter_exchanges" checked>
+				<input class="is-checkradio is-danger is-medium" id="all" type="radio" value="0" name="all" wire:model="filter_exchange_id" checked>
 				<label for="all">All</label>
 			</div>
 			@foreach($user_exchanges as $exchange)
 				<div class="field">
-					<input class="is-checkradio is-danger is-medium" id="{{ $exchange->name }}" type="radio" value="{{ $exchange->id }}" name="{{ $exchange->name }}" wire:model="filter_exchanges">
+					<input class="is-checkradio is-danger is-medium" id="{{ $exchange->name }}" type="radio" value="{{ $exchange->id }}" name="{{ $exchange->name }}" wire:model="filter_exchange_id">
 					<label for="{{ $exchange->name }}">{{ $exchange->name }}</label>
 				</div>
 			@endforeach
-			<hr />	
+			<hr />
+			@if(!empty($filter_coins_ids))
+				<a class="has-text-dark" wire:click="deselectAll"><u>Uncheck All</u></a>
+			@else
+				<a class="has-text-dark" wire:click="selectAll"><u>Check All</u></a>
+			@endif
+
+			<br /><br />
 			@foreach($user_coins as $coin)
 				<div class="field">
-					<input class="is-checkradio is-danger" id="{{ $coin->name }}" type="checkbox" value="{{ $coin->id }}" name="{{ $coin->name }}" wire:model="filter_coins">
+					<input class="is-checkradio is-danger" id="{{ $coin->name }}" type="checkbox" value="{{ $coin->id }}" name="{{ $coin->name }}" wire:model="filter_coins_ids">
 					<label for="{{ $coin->name }}">
 						<b>{{ $coin->symbol }}</b> ({{ $coin->name }})
 					</label>
@@ -77,7 +84,7 @@
 					@else
 					No records found...
 					<br />
-					@if($filter_exchanges[0] != 0 && !$filter_coins)
+					@if($filter_exchange_id[0] != 0 && !$filter_coins_ids)
 						<span class="has-text-danger is-size-5">Please select at least one coin</span>
 					@endif
 					@endif

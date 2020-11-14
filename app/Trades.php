@@ -24,7 +24,7 @@ class Trades extends Model
     
     static public function totalBtc($exchange_id) {
         $total = null;
-        $trades = Trades::where('is_active', 1)->where('exchange_id', $exchange_id)->where('user_id', Auth::id())->where('coin_id', 1)->get('quantity');
+        $trades = Trades::where('is_active', 1)->where('exchange_id', $exchange_id)->where('user_id', auth()->id())->where('coin_id', 1)->get('quantity');
         foreach($trades as $trade) {
             $total += $trade->quantity;
         }
