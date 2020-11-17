@@ -40,7 +40,7 @@
         <a href="{{ route('trades.create') }}" class="navbar-item">
           Add Trade
         </a>
-        <a href="{{ route('trades.active') }}" class="navbar-item">
+        <a href="{{ route('trades.active.vue') }}" class="navbar-item">
           Active Trades
         </a>
         <a href="{{ route('trades.closed') }}" class="navbar-item">

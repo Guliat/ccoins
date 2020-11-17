@@ -26,6 +26,13 @@ class TradesController extends Controller {
 		return Trades::where('user_id', auth()->id())->where('is_active', 1);
 	}
 
+
+	public function activeTradesVue()
+	{
+		$trades = Trades::where('user_id', auth()->id())->where('is_active', 1)->get();
+		$bitcoin = Coins::where('name', 'bitcoin')->select('price')->first();
+		return view('trades.active_vue')->withTrades($trades)->withBitcoin($bitcoin);
+	}
 	/**
 	 * Active trades for user
 	 * 
