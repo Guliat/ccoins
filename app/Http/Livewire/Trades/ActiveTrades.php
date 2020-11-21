@@ -2,91 +2,95 @@
 
 namespace App\Http\Livewire\Trades;
 
-use App\User;
-use App\Trades;
 use Livewire\Component;
-use App\Http\Controllers\TradesController;
+use App\Trades;
+use App\Services\TradeService;
+use App\Http\Controllers\CoinsController;
+use App\Http\Controllers\ExchangesController;
 
-class ActiveTrades extends Component {
+class ActiveTrades extends Component
+{
 
   public $user_exchanges;
+  public $selected_exchange = 0;
   public $user_coins;
   public $user_coins_ids = [];
-  public $exchanges_coins = [];
-  public $filter_exchange_id = [0];
-  public $filter_coins_ids = [];
-  public $trades_coins_ids = [];
-  // public $sort = '';
-  // public $direction = 'asc';
+  public $selected_coins = [];
+  public $trades_coins_ids;
+  public $sort;
+  public $direction = 'asc';
 
-  public function mount() {
 
-    $user = User::where('id', auth()->id())->first();
-    $trades = Trades::with('coin')->get();
-
-    foreach($trades as $trade) {
-      $array[] = $trade->coin->id;
-      $this->user_coins_ids = array_unique($array);
-    }
-
-    if(empty($this->user_coins))
-    {
-      $this->user_coins = $user->coins->whereIn('id', $this->user_coins_ids);
-    }
-
-    if(empty($this->user_exchanges))
-    {
-      $this->user_exchanges = $user->exchanges;
-    }
-
-  }
-
-  // public function change_direction()
-  // {
-  //   if($this->direction == 'asc') {
-  //     $this->direction = 'desc';
-  //   } else {
-  //     $this->direction = 'asc';
-  //   }
-  // }
-
-  public function selectAll() {
-    $this->filter_coins_ids = $this->user_coins_ids;
-  }
-  public function deselectAll()
+  public function mount()
   {
-    $this->filter_coins_ids = [];
+    $this->user_exchanges = ExchangesController::userActiveExchanges();
+    $this->user_coins = CoinsController::userActiveCoins();
   }
 
+
+  public function getTradesCoinsIds()
+  {
+    $trades_coins = Trades::active()
+              ->when($this->selected_exchange, function ($query) {
+                return $query->where('exchange_id', $this->selected_exchange);
+              })->get();
+
+    foreach ($trades_coins as $trade) {
+      $array[] = $trade->coin_id;
+    }
+    return array_unique($array);
+  }
+
+  public function getTradesCoins()
+  {
+   return CoinsController::userActiveCoins()->whereIn('id', $this->trades_coins_ids);
+  }
+
+
+  public function calculatedCollection() {
+    $calc = new TradeService;
+    $newCollection = collect();
+    $trades = Trades::active()
+              ->when($this->selected_exchange, function ($query) {
+                return $query->where('exchange_id', $this->selected_exchange);
+              })
+              ->when($this->selected_coins, function ($query) {
+                return $query->whereIn('coin_id', $this->selected_coins);
+              })
+              ->get();
+
+    foreach ($trades as $trade) {
+      $trade['available'] = $calc->calculateAvailable($trade->quantity, $trade->coin->price);
+      $trade['paid'] = $calc->calculatePaid($trade->quantity, $trade->open_price);
+      $trade['profit'] = $calc->calculateProfit($trade->quantity, $trade->coin->price, $trade->open_price);
+      $trade['exchange_name'] = $trade->exchange->name;
+      $trade['coin_name'] = $trade->coin->name;
+      $newCollection->push($trade);
+    }
+    return $newCollection;
+  }
+
+  public function changeDirection()
+  {
+    if ($this->direction == 'asc') {
+      $this->direction = 'desc';
+    } else {
+      $this->direction = 'asc';
+    }
+  }
   public function render() {
-    $trades = new TradesController;
-    if ($this->filter_exchange_id[0] == 0 && empty($this->filter_coins_ids))
-    {
-      // RETURN ALL RECORDS
-      $data = $trades->activeTrades();
+
+    $this->trades_coins_ids = $this->getTradesCoinsIds();
+    $this->user_coins = $this->getTradesCoins();
+
+    if($this->direction == 'asc') {
+      $data = $this->calculatedCollection()->sortBy($this->sort);
     }
-    elseif ($this->filter_exchange_id[0] == 0 && !empty($this->filter_coins_ids))
-    {
-      // RETURN RECORDS FOR ALL EXCHANGES WITH SELECTED COINS
-      $data = $trades->activeTrades()->whereIn('coin_id', $this->filter_coins_ids);
+    else {
+      $data = $this->calculatedCollection()->sortByDesc($this->sort);
     }
-    else
-    {
-      // RETURN RECORDS FOR SELECTED EXCHANGES AND SELECTED COINS
 
-      $this->exchanges_coins = [];
-
-      $user = User::where('id', auth()->id())->first();
-      
-      $trd = Trades::where('exchange_id', $this->filter_exchange_id)->get();
-
-      foreach($trd as $trade) {
-        $this->exchanges_coins[] = $trade->coin_id;
-      }
-
-      $this->user_coins = $user->coins->whereIn('id', $this->exchanges_coins);
-      $data = $trades->activeTrades()->whereIn('coin_id', $this->filter_coins_ids)->whereIn('exchange_id', $this->filter_exchange_id);
-    }
     return view('livewire.trades.active-trades')->withData($data);
   }
+
 }

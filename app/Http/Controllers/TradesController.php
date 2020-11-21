@@ -17,39 +17,11 @@ class TradesController extends Controller {
 		$this->middleware('auth');
 	}
 
-	/**
-	 * Shortcut to active trades for user
-	 * 
-	 * @return collection You must use get() or first()... etc
-	 */
-	public function userActiveTrades() {
-		return Trades::where('user_id', auth()->id())->where('is_active', 1);
-	}
-
-
 	public function activeTradesVue()
 	{
 		$trades = Trades::where('user_id', auth()->id())->where('is_active', 1)->get();
 		$bitcoin = Coins::where('name', 'bitcoin')->select('price')->first();
 		return view('trades.active_vue')->withTrades($trades)->withBitcoin($bitcoin);
-	}
-	/**
-	 * Active trades for user
-	 * 
-	 * @return collection All active trades plus calculated values (available, paid, profit, etc)
-	 */
-	public function activeTrades() {
-		$calc = new TradeService;
-		$newCollection = collect();
-		$trades = $this->userActiveTrades()->get();
-
-		foreach($trades as $trade) {
-			$trade['available'] = $calc->calculateAvailable($trade->quantity, $trade->coin->price);
-			$trade['paid'] = $calc->calculatePaid($trade->quantity, $trade->open_price);
-			$trade['profit'] = $calc->calculateProfit($trade->quantity, $trade->coin->price, $trade->open_price);
-			$newCollection->push($trade);
-		}
-		return $newCollection;
 	}
 
 	public function closedTrades() {

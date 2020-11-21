@@ -13,6 +13,13 @@ class ExchangesController extends Controller {
         $this->middleware('auth');
     }
 
+
+    static public function userActiveExchanges()
+    {
+        $get = User::find(auth()->id());
+        return $get->exchanges->where('is_active', 1);
+    }
+
     public function index() {
         $user = User::find(Auth::id());
         $exchanges = $user->exchanges;

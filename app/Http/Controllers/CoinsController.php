@@ -13,6 +13,12 @@ class CoinsController extends Controller {
         $this->middleware('auth');
     }
     
+    static public function userActiveCoins()
+    {
+        $get = User::find(auth()->id());
+        return $get->coins->where('is_active', 1);
+    }
+
     public function index() {
         $user = User::find(Auth::id());
         $coins = $user->coins;
