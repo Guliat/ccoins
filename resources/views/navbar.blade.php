@@ -41,7 +41,10 @@
           Add Trade
         </a>
         <a href="{{ route('trades.active.vue') }}" class="navbar-item">
-          Active Trades
+          Trades VueJS
+        </a>
+        <a href="{{ route('trades.active') }}" class="navbar-item">
+          Trades Livewire
         </a>
         <a href="{{ route('trades.closed') }}" class="navbar-item">
           Closed Trades

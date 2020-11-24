@@ -49,6 +49,14 @@
 					@endif
 				</button>
       @endif
+      <div class="tag is-medium mt-1 @if($total_profit > 0) is-success @else is-danger @endif">
+        Profit/Loss: {{ $total_profit }}$
+      </div>
+      @if($selected_coins && count($selected_coins) == 1)
+        <div class="tag is-medium mt-1 is-info">
+          QUANTITY: {{ $quantity }}
+        </div>
+      @endif
       @if(!$data->isEmpty())
       <div class="columns is-multiline">
         @foreach($data as $trade)

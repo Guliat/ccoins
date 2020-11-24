@@ -19,6 +19,8 @@ class ActiveTrades extends Component
   public $trades_coins_ids;
   public $sort;
   public $direction = 'asc';
+  public $quantity;
+  public $total_profit = null;
 
 
   public function mount()
@@ -62,7 +64,8 @@ class ActiveTrades extends Component
     foreach ($trades as $trade) {
       $trade['available'] = $calc->calculateAvailable($trade->quantity, $trade->coin->price);
       $trade['paid'] = $calc->calculatePaid($trade->quantity, $trade->open_price);
-      $trade['profit'] = $calc->calculateProfit($trade->quantity, $trade->coin->price, $trade->open_price);
+      $this->total_profit += $trade['profit'] = (float)$calc->calculateProfit($trade->quantity, $trade->coin->price, $trade->open_price);
+      $this->quantity += $trade->quantity;
       $trade['exchange_name'] = $trade->exchange->name;
       $trade['coin_name'] = $trade->coin->name;
       $newCollection->push($trade);
@@ -79,7 +82,8 @@ class ActiveTrades extends Component
     }
   }
   public function render() {
-
+    $this->quantity = null;
+    $this->total_profit = null;
     $this->trades_coins_ids = $this->getTradesCoinsIds();
     $this->user_coins = $this->getTradesCoins();
 
