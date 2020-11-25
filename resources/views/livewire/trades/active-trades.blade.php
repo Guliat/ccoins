@@ -56,6 +56,9 @@
         <div class="tag is-medium mt-1 is-info">
           QUANTITY: {{ $quantity }}
         </div>
+        <div class="tag is-medium mt-1 is-warning">
+          Total Available: {{ $total_available }}$
+        </div>
       @endif
       @if(!$data->isEmpty())
       <div class="columns is-multiline">
