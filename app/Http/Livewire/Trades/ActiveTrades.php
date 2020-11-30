@@ -64,8 +64,8 @@ class ActiveTrades extends Component
 
     foreach ($trades as $trade) {
       $trade['paid'] = $calc->calculatePaid($trade->quantity, $trade->open_price);
-      $this->total_available += $trade['available'] = (float)$calc->calculateAvailable($trade->quantity, $trade->coin->price);
-      $this->total_profit += $trade['profit'] = (float)$calc->calculateProfit($trade->quantity, $trade->coin->price, $trade->open_price);
+      $this->total_available += $trade['available'] = $calc->calculateAvailable($trade->quantity, $trade->coin->price);
+      $this->total_profit += $trade['profit'] = $calc->calculateProfit($trade->quantity, $trade->coin->price, $trade->open_price);
       $this->quantity += $trade->quantity;
       $trade['exchange_name'] = $trade->exchange->name;
       $trade['coin_name'] = $trade->coin->name;

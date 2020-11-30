@@ -12,7 +12,7 @@ class TradeService {
   */
   function calculateAvailable($quantity, $current_price)
   {
-    return number_format($quantity*$current_price, 2, '.', ' ');
+    return round($quantity*$current_price, 2);
   }
   /**
    * Calculate and format Paid value
@@ -22,7 +22,7 @@ class TradeService {
    */
   function calculatePaid($quantity, $open_price)
   {
-    return number_format($quantity*$open_price, 2, '.', ' ');
+    return round($quantity*$open_price, 2);
   }
   /**
    * Calculate and format Profit value
@@ -33,7 +33,7 @@ class TradeService {
    */
   function calculateProfit($quantity, $current_price, $open_price)
   {
-    return number_format((($quantity*$current_price)-($quantity*$open_price)), 2, '.', ' ');
+    return round((($quantity*$current_price)-($quantity*$open_price)), 2);
   }
   
 }
