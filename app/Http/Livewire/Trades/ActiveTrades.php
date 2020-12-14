@@ -24,12 +24,65 @@ class ActiveTrades extends Component
   public $total_available = null;
 
 
+  // Jack of Traits
+
+
+
+  public $modalFormVisible = false;
+  public $modelId = 0;
+  public $trade_quantity;
+  public $trade_price;
+  public $modal_type = 'sell';
+  public $modal_quantity;
+  public $modal_price;
+  public $modal_coin_price;
+  // public $modal_trade;
+
+  public function update()
+  {
+    // Page::find($this->modelId)->update($this->modelData());
+    $this->modalFormVisible = false;
+  }
+  public function updateShowModal($id)
+  {
+    $this->modal_type = 'update';
+    $this->modelId = $id;
+    $this->modalFormVisible = true;
+    $this->loadModel();
+  }
+  public function sellShowModal($id)
+  {
+    $this->modal_type = 'sell';
+    $this->modelId = $id;
+    $this->modalFormVisible = true;
+    $this->loadModel();
+  }
+  public function convertShowModal($id)
+  {
+    $this->modal_type = 'convert';
+    $this->modelId = $id;
+    $this->modalFormVisible = true;
+    $this->loadModel();
+  }
+
+  public function loadModel()
+  {
+    $data = $this->calculatedCollection()->where('id', $this->modelId)->first();
+    $this->modal_quantity = $data->quantity;
+    $this->modal_price = $data->open_price;
+    $this->modal_coin_price = $data->coin->price;
+    // dd($this->modal_trade);
+  }
+  
+
+
+  // END of Jack of Traits
+
   public function mount()
   {
     $this->user_exchanges = ExchangesController::userActiveExchanges();
     $this->user_coins = CoinsController::userActiveCoins();
   }
-
 
   public function getTradesCoinsIds()
   {
@@ -49,8 +102,8 @@ class ActiveTrades extends Component
    return CoinsController::userActiveCoins()->whereIn('id', $this->trades_coins_ids);
   }
 
-
-  public function calculatedCollection() {
+  public function calculatedCollection()
+  {
     $calc = new TradeService;
     $newCollection = collect();
     $trades = Trades::active()
@@ -82,6 +135,7 @@ class ActiveTrades extends Component
       $this->direction = 'asc';
     }
   }
+
   public function render() {
     $this->quantity = null;
     $this->total_profit = null;

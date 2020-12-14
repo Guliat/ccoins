@@ -11,6 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300&display=swap" rel="stylesheet">
   <!-- Styles -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
   <link href="{{ asset('/') }}css/app.css?v=11112020" rel="stylesheet">
   <style>
       html, body {

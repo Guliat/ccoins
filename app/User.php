@@ -18,6 +18,10 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Exchanges', 'users_exchanges', 'user_id', 'exchange_id')->withPivot('note')->withTimestamps();
     }
 
+    public function trades() {
+        return $this->hasMany('App\Trades');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
