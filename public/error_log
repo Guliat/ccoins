@@ -1,0 +1,2 @@
+[09-Jan-2021 20:50:37 Europe/Sofia] PHP Warning:  require(/home/poluchim/public_html/ccoins/public/../vendor/autoload.php): failed to open stream: No such file or directory in /home/poluchim/public_html/ccoins/public/index.php on line 24
+[09-Jan-2021 20:50:37 Europe/Sofia] PHP Fatal error:  require(): Failed opening required '/home/poluchim/public_html/ccoins/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/poluchim/public_html/ccoins/public/index.php on line 24

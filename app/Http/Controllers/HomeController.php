@@ -13,7 +13,7 @@ class HomeController extends Controller {
     }
 
     static public function updatePrices() {
-        $coins = Coins::all();
+        $coins = Coins::where('is_active', 1)->get();
         $client = new CoinGeckoClient();
         foreach($coins as $coin) {
             $data = $client->simple()->getPrice($coin->api_link, 'usd');

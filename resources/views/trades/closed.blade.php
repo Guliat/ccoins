@@ -7,7 +7,9 @@
       <th>exchange</th>
       <th>coin</th>
       <th>closed quantity</th>
-      <th>price</th>
+      <th>open price</th>
+      <th>closed price</th>
+      <th>paid</th>
       <th>profit</th>
     </thead>
     @foreach($trades as $trade)
@@ -21,11 +23,17 @@
         @endif
       </td>
       <td>
+        ${{ $trade->open_price }}  
+      </td>
+      <td>
         @if($trade->close_price)
           ${{ $trade->close_price }}
         @else
           ${{ $trade->bitcoin_price }}
         @endif
+      </td>
+      <td>
+          ${{ number_format($trade->quantity * $trade->open_price, 2) }}
       </td>
       <td>
         ${{ number_format($trade->profit_loss, 2) }}
